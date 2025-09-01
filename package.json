@@ -1,0 +1,29 @@
+{
+  "name": "unique-custom-id",
+  "version": "1.0.0",
+  "description": "⚡️ Generate custom IDs like never before — fast, fun, and fully yours! 🔥",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/calebephrem/unique-custom-id"
+  },
+  "bugs": {
+    "url": "https://github.com/calebephrem/unique-custom-id/issues",
+    "email": "quantumpandaprog@gmail.com"
+  },
+  "scripts": {
+    "start": "node .",
+    "dev": "node --watch ."
+  },
+  "keywords": [
+    "ucid",
+    "unique custom id",
+    "custom id",
+    "unique id",
+    "id",
+    "id generator",
+    "generate id"
+  ],
+  "author": "Caleb Ephrem",
+  "license": "MIT"
+}
