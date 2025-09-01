@@ -46,19 +46,22 @@ function resolveFormat(octetFormat, i, defaultLen, sep) {
 
 /**
  * Generates a customizable ID string composed of shuffled octets.
+ *
  * @param {Object} [options={}] - Configuration options for ID generation.
  * @param {number} [options.octets=4] - Number of octets in the ID.
- * @param {boolean} [options.uppercase=false] - Include uppercase letters.
- * @param {boolean} [options.lowercase=true] - Include lowercase letters.
  * @param {number} [options.octetLength=8] - Default length of each octet.
- * @param {string|Array} [options.octetFormat=''] - Custom format for octet lengths.
- * @param {boolean} [options.numbers=true] - Include numeric characters.
+ * @param {string|Array} [options.octetFormat=''] - Custom format for octet lengths (e.g., [6, 4, 8]).
+ * @param {boolean} [options.uppercase=false] - Include uppercase letters (A–Z).
+ * @param {boolean} [options.lowercase=true] - Include lowercase letters (a–z).
+ * @param {boolean} [options.numbers=true] - Include numeric characters (0–9).
+ * @param {boolean} [options.symbols=false] - Include symbols (!#$%&, etc.).
+ * @param {string|null} [options.includeOnly=null] - Override character set with a custom string.
  * @param {string} [options.octetSeparator='-'] - Separator between octets.
- * @param {boolean} [options.symbols=false] - Include symbols.
- * @param {string|null} [options.includeOnly=null] - Override character set with custom string.
- * @returns {string} The generated ID string.
- * @throws Will throw an error if octets or octetLength are less than or equal to zero.
- * @throws Will throw an error if the character set is empty.
+ * @param {string} [options.prefix=''] - Optional string to prepend to the generated ID.
+ * @param {string} [options.suffix=''] - Optional string to append to the generated ID.
+ * @returns {string} - The generated ID string.
+ * @throws Will throw an error if `octets` or `octetLength` are less than or equal to zero.
+ * @throws Will throw an error if the character set is empty after applying options.
  */
 function ucidGenerateId(options = {}) {
   const {
@@ -71,6 +74,8 @@ function ucidGenerateId(options = {}) {
     octetSeparator = '-',
     symbols = false,
     includeOnly = null,
+    prefix = '',
+    suffix = '',
   } = options;
 
   if (octets <= 0) throw new Error('Octets must be greater than 0');
@@ -95,7 +100,7 @@ function ucidGenerateId(options = {}) {
     return shuffleStr(shuffleStr(raw));
   });
 
-  return ids.join(octetSeparator);
+  return `${prefix}${ids.join(octetSeparator)}${suffix}`;
 }
 
 module.exports = { shuffleStr, ucidGenerateId };
