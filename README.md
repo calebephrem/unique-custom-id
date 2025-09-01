@@ -7,9 +7,10 @@
 Because it's...
 
 - 💿 **Compact** — Zero dependencies!
-- 🪶 **Lightweight** — Less than 10kb!
+- 🪶 **Lightweight** — Less than 20kb!
 - 🧠 **Simple** — Just call a single function and boom 💥: instant ID!
 - 🔐 **Secure** — Fresh, unique IDs every. single. time.
+- 🌀 **CLI** — spin up IDs faster than you can blink
 
 ## 📦 Installation
 
