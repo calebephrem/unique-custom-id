@@ -1,7 +1,7 @@
 {
   "name": "unique-custom-id",
-  "version": "2.0.0",
-  "description": "⚡️ Generate custom IDs like never before — fast, fun, and fully yours! 🔥",
+  "version": "2.1.0",
+  "description": "⚡️ Generate custom IDs like never before — fast, fun, and fully yours!",
   "main": "index.js",
   "bin": {
     "ucid": "./bin/ucid.js"
@@ -21,7 +21,7 @@
     "unique id",
     "id",
     "id generator",
-    "generate id"
+    "generator id"
   ],
   "author": "Caleb Ephrem",
   "license": "MIT"

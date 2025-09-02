@@ -36,7 +36,7 @@ If you’ve:
 
 ## 💬 Join the Conversation
 
-Want to discuss an idea before building it? Open a discussion or ping us via issues!  
+Want to discuss an idea before building it? Open a discussion or ping us via issues!
 
 ## 📢 Final Words
 

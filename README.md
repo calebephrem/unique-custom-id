@@ -7,7 +7,7 @@
 Because it's...
 
 - 💿 **Compact** — Zero dependencies!
-- 🪶 **Lightweight** — Less than 20kb!
+- 🪶 **Lightweight** — Less than 30kb!
 - 🧠 **Simple** — Just call a single function and boom 💥: instant ID!
 - 🔐 **Secure** — Fresh, unique IDs every. single. time.
 - 🌀 **CLI** — spin up IDs faster than you can blink
@@ -20,14 +20,7 @@ npm install unique-custom-id
 
 ## 🧬 What’s Under the Hood?
 
-UCID runs independently without any dependencies — just pure JavaScript magic ✨.
-
-It uses:
-
-- 🌀 Fisher-Yates Shuffle
-- 🎲 Random Math
-- 🔁 Nested Loops
-- 🔗 Chained Statements
+UCID runs independently without any dependencies — just pure JavaScript magic ✨. It uses Fisher-Yates Shuffle, Random Math etc.
 
 ## 🛠️ How to Use It
 
@@ -148,6 +141,20 @@ ucid({ octets: 2, octetFormat: 49 });
 // Result: pr3e-piis0fdy9
 ```
 
+### 📄 `template` (string | null)
+
+Use `%id` as a placeholder to inject generated IDs into custom strings.
+
+```js
+ucid({
+  octets: 1,
+  octetLength: 8,
+  includeOnly: '1234567890abcdef',
+  template: 'user-%id-session-%id',
+});
+// Result: user-1a97ada5-session-ec64776c
+```
+
 ## 🧪 Use Case Examples
 
 ### 🆔 UUID Generator
@@ -174,19 +181,6 @@ const sha = ucid({
 
 console.log(sha);
 // Result: 7ca8f13c663210d577a82fd91aa39227f24d2791
-```
-
-### ⚙️ Binary Style
-
-```js
-const binary = ucid({
-  octets: 1,
-  octetLength: 20,
-  includeOnly: '01',
-});
-
-console.log(binary);
-// Result: 00101011101100101101
 ```
 
 ## 🤝 Want to Contribute?

@@ -1,7 +1,7 @@
 /**
  * Shuffles the characters in a string using the Fisher-Yates algorithm.
  * @param {string} str - The string to shuffle.
- * @returns {string} The shuffled string. Returns an empty string if input is invalid.
+ * @returns {string} - The shuffled string. Returns an empty string if input is invalid.
  */
 function shuffleStr(str) {
   if (typeof str !== 'string') {
@@ -56,6 +56,7 @@ function resolveFormat(octetFormat, i, defaultLen, sep) {
  * @param {boolean} [options.numbers=true] - Include numeric characters (0–9).
  * @param {boolean} [options.symbols=false] - Include symbols (!#$%&, etc.).
  * @param {string|null} [options.includeOnly=null] - Override character set with a custom string.
+ * @param {string|null} [options.template=null] - Generate an id with specific template.
  * @param {string} [options.octetSeparator='-'] - Separator between octets.
  * @param {string} [options.prefix=''] - Optional string to prepend to the generated ID.
  * @param {string} [options.suffix=''] - Optional string to append to the generated ID.
@@ -74,6 +75,7 @@ function ucidGenerateId(options = {}) {
     octetSeparator = '-',
     symbols = false,
     includeOnly = null,
+    template = null,
     prefix = '',
     suffix = '',
   } = options;
@@ -94,13 +96,20 @@ function ucidGenerateId(options = {}) {
 
   if (!charset) throw new Error('Character set is empty. Adjust your options.');
 
-  const ids = Array.from({ length: octets }, (_, i) => {
-    const len = resolveFormat(octetFormat, i, octetLength, octetSeparator);
-    const raw = Array.from({ length: len }, () => randChar(charset)).join('');
-    return shuffleStr(shuffleStr(raw));
-  });
+  const generateId = () => {
+    const ids = Array.from({ length: octets }, (_, i) => {
+      const len = resolveFormat(octetFormat, i, octetLength, octetSeparator);
+      const raw = Array.from({ length: len }, () => randChar(charset)).join('');
+      return shuffleStr(shuffleStr(raw));
+    });
+    return `${prefix}${ids.join(octetSeparator)}${suffix}`;
+  };
 
-  return `${prefix}${ids.join(octetSeparator)}${suffix}`;
+  if (typeof template === 'string') {
+    return template.replace(/%id/g, () => generateId());
+  }
+
+  return generateId();
 }
 
 module.exports = { shuffleStr, ucidGenerateId };
