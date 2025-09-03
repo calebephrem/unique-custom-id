@@ -51,7 +51,7 @@ console.log(id);
 
 UCID isn’t just easy — it’s _flexible_ too! Customize your ID like a pro 🛠️
 
-### 🔠 `uppercase` and `lowercase` (booleans)
+### `uppercase` and `lowercase` (booleans)
 
 Control letter casing:
 
@@ -66,7 +66,7 @@ ucid({ uppercase: true, lowercase: false });
 // Result: FFJL9DAO-V3YPLZ2V-252L7URX-XCS3GWP5
 ```
 
-### 🔢 `numbers` and `symbols` (booleans)
+### `numbers` and `symbols` (booleans)
 
 Toggle digits or symbols:
 
@@ -81,7 +81,7 @@ ucid({ numbers: false });
 // Result: jueldfjw-ljhiphtl-ajuptedx-rramdwne
 ```
 
-### 🍡 `octets` (number)
+### `octets` (number)
 
 Set how many segments (octets) the ID should have. Default: `4`.
 
@@ -93,7 +93,7 @@ ucid({ octets: 6 });
 // Result: hr5bg68k-ycxqfb1o-pkofgsm2-j6hnimgy-ehcxulnl-ptmvuf3j
 ```
 
-### 📏 `octetLength` (number)
+### `octetLength` (number)
 
 Define how long each octet should be. Default: `8`.
 
@@ -105,16 +105,16 @@ ucid({ octetLength: 12 });
 // Result: nz4kkg3jxxot-9v9bmx6y8ngt-x4ciymz48z9d-mqopg9mad4v2
 ```
 
-### 🔤 `includeOnly` (string)
+### `includeOnly` (string)
 
 Use a custom character set to generate your ID:
 
 ```js
-ucid({ includeOnly: 'abcdef' });
-// Result: bbcefdfe-dfdecada-dbdeffee-acefbeae
+ucid({ includeOnly: '1234567890abcdef' });
+// Result: f800cdb7-0082b1b8-f0736eb3-4b16949a
 ```
 
-### 🧯 `octetSeparator` (string)
+### `octetSeparator` (string)
 
 Customize the character(s) used to separate octets. Default: `"-"`
 
@@ -122,11 +122,11 @@ Customize the character(s) used to separate octets. Default: `"-"`
 ucid({ octetSeparator: '=' });
 // Result: pro9mns=odvhrd3i=28e2mqzg=t3n530m9
 
-ucid({ octetSeparator: '~~' });
-// Result: qm09extn~~dy7s1bd1~~t6fl9q2g~~mv352ie4
+ucid({ octetSeparator: '~' });
+// Result: qm09extn~dy7s1bd1~t6fl9q2g~mv352ie4
 ```
 
-### 🎛️ `octetFormat` (string | string[] | number | number[])
+### `octetFormat` (string | string[] | number | number[])
 
 Set the **exact** length of each octet individually.
 
@@ -173,7 +173,7 @@ Result: [
 */
 ```
 
-### 📄 `template` (string | null)
+### `template` (string | null)
 
 - Use `%id` as a placeholder to inject generated IDs into custom strings.
 - Use `%ts` as a placeholder to inject timestamp into custom strings.
@@ -196,7 +196,7 @@ ucid({
 // Result: user-26001cde-at-20250903
 ```
 
-### 🗣️ `verbose` (boolean)
+### `verbose` (boolean)
 
 Returns a full object instead of just the generated ID string.
 
@@ -214,7 +214,7 @@ ucid({
 
 /*
 Result: {
-  id: '795ebe1fd531-dbf06d32bd02-f512ad09e84a',
+  ucid: '795ebe1fd531-dbf06d32bd02-f512ad09e84a',
   octets: 3,
   uppercase: false,
   lowercase: true,
@@ -246,17 +246,17 @@ ucid({
 // Result: 80a1a368-A738C260-32eaf5e3-3AF2803F
 
 ucid({
-  octets: 2,
-  octetLength: 8,
+  octets: 3,
+  octetLength: 6,
   includeOnly: '1234567890abcdef',
-  customize: (octet, i) => i == 0 ? `user-${octet}` : i == 1 ? `session-${octet}` : octet,
+  customize: (octet, i) => i == 0 ? `user-${octet}` : i == 1 ? `session-${octet}` : `${i}${octet}`,
 });
-// Result: user-12971c14-session-3dad3908
+// Result: user-81cd0a-session-13634d-212fb85
 ```
 
 ## 🧪 Use Case Examples
 
-### 🆔 UUID Generator
+### UUID Generator
 
 ```js
 const uuid = ucid({
@@ -269,7 +269,7 @@ console.log(uuid);
 // Result: 9803fa1b-e760-6765-30af-a2d7a389c5f6
 ```
 
-### 🔐 SHA-like ID
+### SHA-like ID
 
 ```js
 const sha = ucid({
@@ -289,7 +289,7 @@ If you’re thinking about improving UCID, fixing a bug, or just having fun, mak
 
 ## 🧸 Final Thoughts
 
-UCID is built for _fun_ and _flexibility_ — perfect for devs who want a secure, short, and sweet identifier in seconds. 🧑‍💻
+UCID is built for _fun_ and _flexibility_ — perfect for devs who want a secure, short, and sweet identifier in seconds.
 
 ## 🌟 Give It a Try!
 

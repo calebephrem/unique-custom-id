@@ -1,6 +1,6 @@
 {
   "name": "unique-custom-id",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "⚡️ Generate custom IDs like never before — fast, fun, and fully yours!",
   "main": "index.js",
   "bin": {

@@ -151,7 +151,7 @@ function ucidGenerateId(options = {}) {
 
   if (verbose) {
     const generateVerbose = () => ({
-      id: generateId(),
+      ucid: generateId(),
       ...defaults,
       ...options,
     });

@@ -1,5 +1,11 @@
 # Change Log
 
+## `v2.3.1`
+
+### 🚀 Enhancements
+
+- Change id to ucid in verbose mode
+
 ## `v2.3.0`
 
 ### 🚀 Enhancements
