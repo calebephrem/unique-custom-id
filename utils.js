@@ -60,6 +60,8 @@ function resolveFormat(octetFormat, i, defaultLen, sep) {
  * @param {string} [options.octetSeparator='-'] - Separator between octets.
  * @param {string} [options.prefix=''] - Optional string to prepend to the generated ID.
  * @param {string} [options.suffix=''] - Optional string to append to the generated ID.
+ * @param {boolean} [options.verbose=false] - Return the whole options object instead of id string
+ * @param {(octet: string, index: number) => string} [options.customize] -Function to customize each octet
  * @returns {string} - The generated ID string.
  * @throws Will throw an error if `octets` or `octetLength` are less than or equal to zero.
  * @throws Will throw an error if the character set is empty after applying options.
@@ -79,6 +81,7 @@ function ucidGenerateId(options = {}) {
     prefix: '',
     suffix: '',
     verbose: false,
+    customize: null,
   };
 
   const {
@@ -95,6 +98,7 @@ function ucidGenerateId(options = {}) {
     prefix = '',
     suffix = '',
     verbose = false,
+    customize = null,
   } = options;
 
   if (octets <= 0) throw new Error('Octets must be greater than 0');
@@ -125,7 +129,8 @@ function ucidGenerateId(options = {}) {
     const ids = Array.from({ length: octets }, (_, i) => {
       const len = resolveFormat(octetFormat, i, octetLength, octetSeparator);
       const raw = Array.from({ length: len }, () => randChar(charset)).join('');
-      return shuffleStr(shuffleStr(raw));
+      const octet = shuffleStr(shuffleStr(raw));
+      return typeof customize === 'function' ? customize(octet, i) : octet;
     });
     return `${prefix}${ids.join(octetSeparator)}${suffix}`;
   };

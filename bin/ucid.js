@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { ucidGenerateId } = require('../utils'); // adjust path if needed
+const { ucidGenerateId } = require('../utils');
 
 const args = process.argv.slice(2);
 const options = {};
@@ -23,6 +23,7 @@ Options:
   --prefix=string             Prepend a string to the generated ID
   --suffix=string             Append a string to the generated ID
   --template=string           Custom template with %id placeholders (e.g. "Your-ID:%id-%id")
+  --verbose                   Return the whole options object including the id
   --help                      Show this help message
 `;
 

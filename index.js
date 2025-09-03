@@ -16,6 +16,8 @@ const { ucidGenerateId } = require('./utils.js');
  * @param {string|null} [options.template=null] - Generate an id with specific template.
  * @param {string} [options.prefix=''] - Optional string to prepend to the generated ID.
  * @param {string} [options.suffix=''] - Optional string to append to the generated ID.
+ * @param {boolean} [options.verbose=false] - Return the whole options object instead of id string
+ * @param {(octet: string, index: number) => string} [options.customize] - Function to customize each octet
  * @returns {string} - The generated ID string.
  */
 function ucid(
@@ -32,7 +34,8 @@ function ucid(
     template: null,
     prefix: '',
     suffix: '',
-    verbose: false
+    verbose: false,
+    customize: null,
   }
 ) {
   return ucidGenerateId(options);

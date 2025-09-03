@@ -4,6 +4,7 @@
 
 ### 🚀 Enhancements
 
+- Add `customize` option to UCID
 - Add `verbose` option to UCID and UCID cli
 - Add `%ts` to `template` option to inject timestamp
 

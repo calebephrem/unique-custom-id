@@ -202,6 +202,28 @@ Result: {
 */
 ```
 
+### `customize` (null | ((octet: string, index: number) => string))
+
+Function to customize each octet further than other options.
+
+```js
+ucid({
+  octets: 2,
+  octetLength: 8,
+  includeOnly: '1234567890abcdef',
+  customize: (octet, i) => i % 2 ? octet.toUpperCase() : octet.toLowerCase()
+});
+// Result: 80a1a368-A738C260-32eaf5e3-3AF2803F
+
+ucid({
+  octets: 2,
+  octetLength: 8,
+  includeOnly: '1234567890abcdef',
+  customize: (octet, i) => i == 0 ? `user-${octet}` : i == 1 ? `session-${octet}` : octet
+});
+// Result: user-12971c14-session-3dad3908
+```
+
 ## 🧪 Use Case Examples
 
 ### 🆔 UUID Generator
