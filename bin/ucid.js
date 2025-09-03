@@ -6,24 +6,23 @@ const args = process.argv.slice(2);
 const options = {};
 
 const helpText = `
-Usage: ucid [options]
-
-Generates a customizable ID composed of shuffled octets.
+Usage: npx unique-custom-id [options].
 
 Options:
   --uppercase                 Include uppercase letters (A–Z)
-  --lowercase                 Include lowercase letters (a–z) (default: true)
-  --numbers                   Include numeric characters (0–9) (default: true)
+  --lowercase                 Include lowercase letters (a–z)
+  --numbers                   Include numeric characters (0–9)
   --no-numbers                Disable numeric characters
   --symbols                   Include symbols (default: false)
-  --octets=number             Number of ID segments (default: 4)
-  --octetLength=number        Length of each segment (default: 8)
-  --instances=number          Number of IDs to generate
-  --sep=string                Separator character between segments (default: "-")
-  --includeOnly=string        Use only the provided characters
-  --prefix=string             Prepend a string to the generated ID
-  --suffix=string             Append a string to the generated ID
-  --template=string           Custom template with %id placeholders (e.g. "Your-ID:%id-%id")
+  --octets                    Number of ID segments (default: 4)
+  --octetLength               Length of each segment (default: 8)
+  --instances                 Number of IDs to generate
+  --octetSeparator            Separator character between segments
+  --octetFormat               Custom format for octet lengths
+  --includeOnly               Use only the provided characters
+  --prefix                    Prepend a string to the generated ID
+  --suffix                    Append a string to the generated ID
+  --template                  Custom template with %id placeholders
   --verbose                   Return the whole options object including the id
   --help                      Show this help message
 `;
@@ -50,8 +49,12 @@ args.forEach((arg) => {
         options[key] = Number(value);
         break;
 
-      case 'sep':
+      case 'separator':
         options.octetSeparator = value;
+        break;
+
+      case 'format':
+        options.octetFormat = value;
         break;
 
       case 'includeOnly':

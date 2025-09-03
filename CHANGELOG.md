@@ -5,6 +5,7 @@
 ### 🚀 Enhancements
 
 - Add `instances` option to UCID and UCID cli
+- Add more options to UCID cli
 
 ## `v2.2.0`
 
