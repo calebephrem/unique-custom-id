@@ -1,5 +1,11 @@
 # Change Log
 
+## `v2.2.0`
+
+### 🚀 Enhancements
+
+- Add `verbose` option to UCID and UCID cli
+
 ## `v2.1.0`
 
 ### 🚀 Enhancements

@@ -65,6 +65,22 @@ function resolveFormat(octetFormat, i, defaultLen, sep) {
  * @throws Will throw an error if the character set is empty after applying options.
  */
 function ucidGenerateId(options = {}) {
+  const defaults = {
+    octets: 4,
+    uppercase: false,
+    lowercase: true,
+    octetLength: 8,
+    octetFormat: '',
+    numbers: true,
+    octetSeparator: '-',
+    symbols: false,
+    includeOnly: null,
+    template: null,
+    prefix: '',
+    suffix: '',
+    verbose: false
+  }
+
   const {
     octets = 4,
     uppercase = false,
@@ -78,6 +94,7 @@ function ucidGenerateId(options = {}) {
     template = null,
     prefix = '',
     suffix = '',
+    verbose=false
   } = options;
 
   if (octets <= 0) throw new Error('Octets must be greater than 0');
@@ -109,7 +126,10 @@ function ucidGenerateId(options = {}) {
     return template.replace(/%id/g, () => generateId());
   }
 
-  return generateId();
+  return verbose ? {
+    id: generateId(),
+    ...defaults, ...options, 
+  } : generateId();
 }
 
 module.exports = { shuffleStr, ucidGenerateId };

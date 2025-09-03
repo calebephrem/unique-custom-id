@@ -155,6 +155,44 @@ ucid({
 // Result: user-1a97ada5-session-ec64776c
 ```
 
+### 🗣️ `verbose` (boolean)
+
+Returns a full object instead of just the generated ID string.
+
+If `verbose` is `true`, UCID will return an object containing the generated id and other options that were passed in.
+
+This is especially useful for logging, debugging, testing, or introspection. Default: `false`
+
+```js
+ucid({
+  octets: 3,
+  octetLength: 12,
+  includeOnly: '1234567890abcdef',
+  verbose: true,
+});
+
+/* 
+
+Result: {
+  id: '795ebe1fd531-dbf06d32bd02-f512ad09e84a',
+  octets: 3,
+  uppercase: false,
+  lowercase: true,
+  octetLength: 12,
+  octetFormat: '',
+  numbers: true,
+  octetSeparator: '-',
+  symbols: false,
+  includeOnly: '1234567890abcdef',
+  template: null,
+  prefix: '',
+  suffix: '',
+  verbose: true
+}
+
+*/
+```
+
 ## 🧪 Use Case Examples
 
 ### 🆔 UUID Generator
@@ -186,7 +224,7 @@ console.log(sha);
 ## 🤝 Want to Contribute?
 
 We love contributions! 💙  
-If you’re thinking about improving UCID, fixing a bug, or just having fun, make sure to read the [contributing guide](https://github.com/calebephrem/ucid/blob/main/CONTRIBUTING.md) before you start. It’s got everything you need to know to get up and running! 🚀
+If you’re thinking about improving UCID, fixing a bug, or just having fun, make sure to read the [contributing guide](https://github.com/calebephrem/unique-custom-id/blob/main/CONTRIBUTING.md) before you start. It’s got everything you need to know to get up and running! 🚀
 
 ## 🧸 Final Thoughts
 

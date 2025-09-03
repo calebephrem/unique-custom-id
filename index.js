@@ -32,6 +32,7 @@ function ucid(
     template: null,
     prefix: '',
     suffix: '',
+    verbose: false
   }
 ) {
   return ucidGenerateId(options);

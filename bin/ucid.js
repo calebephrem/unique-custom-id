@@ -58,6 +58,10 @@ args.forEach((arg) => {
         options[key] = value;
         break;
 
+      case 'verbose':
+        options.verbose = true;
+        break;
+
       case 'help':
         console.log(helpText);
         process.exit(0);
