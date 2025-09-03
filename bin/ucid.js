@@ -18,6 +18,7 @@ Options:
   --symbols                   Include symbols (default: false)
   --octets=number             Number of ID segments (default: 4)
   --octetLength=number        Length of each segment (default: 8)
+  --instances=number          Number of IDs to generate
   --sep=string                Separator character between segments (default: "-")
   --includeOnly=string        Use only the provided characters
   --prefix=string             Prepend a string to the generated ID
@@ -45,6 +46,7 @@ args.forEach((arg) => {
 
       case 'octets':
       case 'octetLength':
+      case 'instances':
         options[key] = Number(value);
         break;
 

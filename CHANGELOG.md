@@ -1,5 +1,11 @@
 # Change Log
 
+## `v2.3.0`
+
+### 🚀 Enhancements
+
+- Add `instances` option to UCID and UCID cli
+
 ## `v2.2.0`
 
 ### 🚀 Enhancements

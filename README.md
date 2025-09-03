@@ -141,6 +141,38 @@ ucid({ octets: 2, octetFormat: 49 });
 // Result: pr3e-piis0fdy9
 ```
 
+### `instances` (number)
+
+Number of IDs to generate.
+
+```js
+ucid({
+  instances: 3,
+});
+/*
+Result: [
+  '9v7z1v59-0v28lo6h-8g5qpnhk-dx5f6412',
+  '5689u3lw-ns4wk8sc-u57bgwxz-nm9r8ydf',
+  'ul7pdyya-bgubmkef-zlpp7b79-7v2oo5dq'
+]
+*/
+
+ucid({
+  octets: 4,
+  octetFormat: [2, 4, 6, 8],
+  instances: 5,
+});
+/*
+Result: [
+  'rd-c0ix-mtifus-z7ibcbip',
+  'l6-gngn-1v04eg-do2yei8v',
+  'kf-fprl-klp5bw-o7gcv39u',
+  'tm-v4hq-8h964i-cnpswp29',
+  'uq-iwcb-u44bey-yj0nvs98'
+]
+*/
+```
+
 ### 📄 `template` (string | null)
 
 - Use `%id` as a placeholder to inject generated IDs into custom strings.
@@ -180,8 +212,7 @@ ucid({
   verbose: true,
 });
 
-/* 
-
+/*
 Result: {
   id: '795ebe1fd531-dbf06d32bd02-f512ad09e84a',
   octets: 3,
@@ -198,7 +229,6 @@ Result: {
   suffix: '',
   verbose: true
 }
-
 */
 ```
 
@@ -211,7 +241,7 @@ ucid({
   octets: 2,
   octetLength: 8,
   includeOnly: '1234567890abcdef',
-  customize: (octet, i) => i % 2 ? octet.toUpperCase() : octet.toLowerCase()
+  customize: (octet, i) => (i % 2 ? octet.toUpperCase() : octet.toLowerCase()),
 });
 // Result: 80a1a368-A738C260-32eaf5e3-3AF2803F
 
@@ -219,7 +249,7 @@ ucid({
   octets: 2,
   octetLength: 8,
   includeOnly: '1234567890abcdef',
-  customize: (octet, i) => i == 0 ? `user-${octet}` : i == 1 ? `session-${octet}` : octet
+  customize: (octet, i) => i == 0 ? `user-${octet}` : i == 1 ? `session-${octet}` : octet,
 });
 // Result: user-12971c14-session-3dad3908
 ```

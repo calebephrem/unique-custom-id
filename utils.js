@@ -51,6 +51,7 @@ function resolveFormat(octetFormat, i, defaultLen, sep) {
  * @param {number} [options.octets=4] - Number of octets in the ID.
  * @param {number} [options.octetLength=8] - Default length of each octet.
  * @param {string|Array} [options.octetFormat=''] - Custom format for octet lengths (e.g., [6, 4, 8]).
+ * @param {number} [options.count=1] - Number of IDs to generate.
  * @param {boolean} [options.uppercase=false] - Include uppercase letters (A–Z).
  * @param {boolean} [options.lowercase=true] - Include lowercase letters (a–z).
  * @param {boolean} [options.numbers=true] - Include numeric characters (0–9).
@@ -73,6 +74,7 @@ function ucidGenerateId(options = {}) {
     lowercase: true,
     octetLength: 8,
     octetFormat: '',
+    instances: 1,
     numbers: true,
     octetSeparator: '-',
     symbols: false,
@@ -90,6 +92,7 @@ function ucidGenerateId(options = {}) {
     lowercase = true,
     octetLength = 8,
     octetFormat = '',
+    instances = 1,
     numbers = true,
     octetSeparator = '-',
     symbols = false,
@@ -136,17 +139,30 @@ function ucidGenerateId(options = {}) {
   };
 
   if (typeof template === 'string') {
-    return template
-      .replace(/%id/g, () => generateId())
-      .replace(/%ts/g, () => timestamp());
+    const generateTemplated = () =>
+      template
+        .replace(/%id/g, () => generateId())
+        .replace(/%ts/g, () => timestamp());
+
+    return instances > 1
+      ? Array.from({ length: instances }, () => generateTemplated())
+      : generateTemplated();
   }
 
-  return verbose
-    ? {
-        id: generateId(),
-        ...defaults,
-        ...options,
-      }
+  if (verbose) {
+    const generateVerbose = () => ({
+      id: generateId(),
+      ...defaults,
+      ...options,
+    });
+
+    return instances > 1
+      ? Array.from({ length: instances }, () => generateVerbose())
+      : generateVerbose();
+  }
+
+  return instances > 1
+    ? Array.from({ length: instances }, () => generateId())
     : generateId();
 }
 

@@ -7,6 +7,7 @@ const { ucidGenerateId } = require('./utils.js');
  * @param {number} [options.octets=4] - Number of octets in the ID.
  * @param {number} [options.octetLength=8] - Default length of each octet.
  * @param {string|Array} [options.octetFormat=''] - Custom format for octet lengths (e.g., [4, 6, 8]).
+ * @param {number} [options.count=1] - Number of IDs to generate.
  * @param {boolean} [options.uppercase=false] - Include uppercase letters (A–Z).
  * @param {boolean} [options.lowercase=true] - Include lowercase letters (a–z).
  * @param {boolean} [options.symbols=false] - Include symbols (!@#$%, etc.).
@@ -25,6 +26,7 @@ function ucid(
     octets: 4,
     octetLength: 8,
     octetFormat: '',
+    instances: 1,
     uppercase: false,
     lowercase: true,
     symbols: false,
