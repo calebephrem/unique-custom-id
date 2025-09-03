@@ -78,8 +78,8 @@ function ucidGenerateId(options = {}) {
     template: null,
     prefix: '',
     suffix: '',
-    verbose: false
-  }
+    verbose: false,
+  };
 
   const {
     octets = 4,
@@ -94,7 +94,7 @@ function ucidGenerateId(options = {}) {
     template = null,
     prefix = '',
     suffix = '',
-    verbose=false
+    verbose = false,
   } = options;
 
   if (octets <= 0) throw new Error('Octets must be greater than 0');
@@ -113,6 +113,14 @@ function ucidGenerateId(options = {}) {
 
   if (!charset) throw new Error('Character set is empty. Adjust your options.');
 
+  function timestamp() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}${month}${day}`;
+  }
+
   const generateId = () => {
     const ids = Array.from({ length: octets }, (_, i) => {
       const len = resolveFormat(octetFormat, i, octetLength, octetSeparator);
@@ -123,13 +131,18 @@ function ucidGenerateId(options = {}) {
   };
 
   if (typeof template === 'string') {
-    return template.replace(/%id/g, () => generateId());
+    return template
+      .replace(/%id/g, () => generateId())
+      .replace(/%ts/g, () => timestamp());
   }
 
-  return verbose ? {
-    id: generateId(),
-    ...defaults, ...options, 
-  } : generateId();
+  return verbose
+    ? {
+        id: generateId(),
+        ...defaults,
+        ...options,
+      }
+    : generateId();
 }
 
 module.exports = { shuffleStr, ucidGenerateId };

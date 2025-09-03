@@ -143,7 +143,8 @@ ucid({ octets: 2, octetFormat: 49 });
 
 ### 📄 `template` (string | null)
 
-Use `%id` as a placeholder to inject generated IDs into custom strings.
+- Use `%id` as a placeholder to inject generated IDs into custom strings.
+- Use `%ts` as a placeholder to inject timestamp into custom strings.
 
 ```js
 ucid({
@@ -153,6 +154,14 @@ ucid({
   template: 'user-%id-session-%id',
 });
 // Result: user-1a97ada5-session-ec64776c
+
+ucid({
+  octets: 1,
+  octetLength: 8,
+  includeOnly: '1234567890abcdef',
+  template: 'user-%id-at-%ts',
+});
+// Result: user-26001cde-at-20250903
 ```
 
 ### 🗣️ `verbose` (boolean)
