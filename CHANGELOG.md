@@ -1,5 +1,12 @@
 # Change Log
 
+## `v2.5.0`
+
+### 🚀 Enhancements
+
+- Add `timestamp` option to UCID and UCID cli
+- Add `timestampFormat` option to UCID and UCID cli
+
 ## `v2.4.0`
 
 ### 🚀 Enhancements

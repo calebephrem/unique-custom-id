@@ -14,6 +14,8 @@ const ucidGenerateId = require('./ucid.core.js');
  * @param {boolean} [options.numbers=true] - Include numeric characters (0–9).
  * @param {string} [options.octetSeparator='-'] - Separator between octets.
  * @param {string|null} [options.includeOnly=null] - Override character set with a custom string.
+ * @param {string|null} [options.timestamp=null] - Include timestamp in the id, either 'prefix' or 'suffix'.
+ * @param {string|null} [options.timestampFormat=null] - The format of the timestamp in the id.
  * @param {string|null} [options.template=null] - Generate an id with specific template.
  * @param {string} [options.prefix=''] - Optional string to prepend to the generated ID.
  * @param {string} [options.suffix=''] - Optional string to append to the generated ID.
@@ -33,6 +35,8 @@ function ucid(
     numbers: true,
     octetSeparator: '-',
     includeOnly: null,
+    timestamp: null,
+    timestampFormat: null,
     template: null,
     prefix: '',
     suffix: '',

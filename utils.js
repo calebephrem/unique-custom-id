@@ -20,6 +20,39 @@ function shuffleStr(str) {
 }
 
 /**
+ * @param {string} [format='yyyymmdd'] - Format string containing tokens to be replaced.
+ * @returns {string} Formatted timestamp string.
+ */
+
+function timeStamp(format = 'yyyymmdd') {
+  if (!format) {
+    format = 'yyyymmdd';
+  }
+
+  const now = new Date();
+
+  const pad = (n, len = 2) => n.toString().padStart(len, '0');
+
+  const replacements = {
+    yyyy: now.getFullYear(),
+    yy: now.getFullYear().toString().slice(-2),
+    mm: pad(now.getMonth() + 1),
+    dd: pad(now.getDate()),
+    hh: pad(now.getHours()),
+    min: pad(now.getMinutes()),
+    ss: pad(now.getSeconds()),
+    ms: pad(Math.floor(now.getMilliseconds() / 10)),
+    unix: Math.floor(now.getTime() / 1000),
+    iso: now.toISOString(),
+  };
+
+  return format.replace(
+    /yyyy|yy|mm|dd|hh|min|ss|ms|unix|iso/g,
+    (token) => replacements[token] ?? token
+  );
+}
+
+/**
  * Resolves the length of an octet based on format input.
  * @param {string|Array} octetFormat - Format string or array defining octet lengths.
  * @param {number} i - Index of the current octet.
@@ -54,4 +87,4 @@ const secureRandChar = (charset) => {
   return charset[byte % charset.length];
 };
 
-module.exports = { shuffleStr, resolveFormat, secureRandChar };
+module.exports = { shuffleStr, resolveFormat, secureRandChar, timeStamp };

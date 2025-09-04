@@ -20,6 +20,8 @@ Options:
   --octetSeparator            Separator character between segments
   --octetFormat               Custom format for octet lengths
   --includeOnly               Use only the provided characters
+  --timestamp                 Include timestamp in the id, either 'prefix' or 'suffix'.
+  --timestampFormat           The format of the timestamp in the id.
   --prefix                    Prepend a string to the generated ID
   --suffix                    Append a string to the generated ID
   --template                  Custom template with %id placeholders
@@ -61,6 +63,8 @@ args.forEach((arg) => {
       case 'prefix':
       case 'suffix':
       case 'template':
+      case 'timestamp':
+      case 'timestampFormat':
         options[key] = value;
         break;
 
