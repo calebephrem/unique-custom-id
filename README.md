@@ -147,6 +147,45 @@ ucid({ includeOnly: '1234567890abcdef' });
 // Result: f800cdb7-0082b1b8-f0736eb3-4b16949a
 ```
 
+### `timestamp` (string)
+
+Add timestamp to your id. Either `prefix` or `suffix`.
+
+- `prefix`: before the id. Aliases: `prefix`, `p`, `pre`, `pref`
+- `suffix`: before the id. Aliases: `suffix`, `s`, `suf`, `suff`
+
+```js
+ucid({
+  timestamp: 'prefix', // `p`, `pre` or `pref` works too
+});
+// Result: 20250904-k0ebaf6m-j31g7koc-b25p0p2n-u9iah5i4
+
+ucid({
+  timestamp: 'suff',
+});
+// Result: 05mdc0cp-6k6xvl9c-mgc7s9e3-t98ckh3f-20250904
+```
+
+### `timestampFormat` (string)
+
+Controls how the timestamp is formatted.
+
+```js
+ucid({
+  octets: 3,
+  timestamp: 's',
+  timestampFormat: 'dd-mm-yyyy-hh:mm:ss:ms'
+});
+// Result: gtrf9t1h-u00ycxuw-mxzhjuty-04-09-2025-12:09:00:39
+
+ucid({
+  octets: 3,
+  timestamp: 'p',
+  timestampFormat: 'unix'
+});
+// Result: 1756976740-61p0xk4r-1ad6fg3l-gxwsgpgk
+```
+
 ### `octetSeparator` (string)
 
 Customize the character(s) used to separate octets. Default: `"-"`
