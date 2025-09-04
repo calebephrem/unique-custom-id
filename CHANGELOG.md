@@ -1,5 +1,11 @@
 # Change Log
 
+## `v2.4.0`
+
+### 🚀 Enhancements
+
+- Upgrade security by using crypto module
+
 ## `v2.3.1`
 
 ### 🚀 Enhancements

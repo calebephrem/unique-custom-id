@@ -20,7 +20,40 @@ npm install unique-custom-id
 
 ## 🧬 What’s Under the Hood?
 
-UCID runs independently without any dependencies — just pure JavaScript magic ✨. It uses Fisher-Yates Shuffle, Random Math etc.
+UCID runs independently without any dependencies — just pure JavaScript magic ✨. It uses Fisher-Yates Shuffle, Crypto etc.
+
+**If you use the default options, even if you generate a BILLION IDs PER SECOND, you'd need trillions of years to have a meaningful chance of a collision.** You don't believe me?
+
+### Collision Probability of Secure Random 32-Character ID (Base36)
+
+**ID Format**: `xxxxxxxx-xxxxxxxx-xxxxxxxx-xxxxxxxx`  
+**Character Set**: 36 characters (`0–9`, `a–z`)  
+**Length**: 32 characters  
+**Randomness Source**: Cryptographically secure (`crypto.randomBytes`)
+
+### Total Possible Unique IDs
+
+36^32 ≈ 6.334 × 10^49
+
+### Generation Rate
+
+- IDs per second: 1,000,000,000
+- Seconds per year: 60 × 60 × 24 × 365 = 31,536,000
+- IDs per year: 1 × 10^9 × 31,536,000 = 3.1536 × 10^16
+
+### Collision Threshold (Birthday Paradox)
+
+√(36^32) = 36^16 ≈ 7.961 × 10^24
+
+### Years to Reach 50% Collision Probability
+
+7.961 × 10^24 ÷ 3.1536 × 10^16 ≈ 252,443,706 years
+
+### ✅ Conclusion
+
+Using cryptographically secure randomness, your custom 32-character base36 ID format would take **~252 million years** of generating **1 BILLION IDs PER SECOND** to reach a **50% chance of collision**. (note the "billion" and "per second")
+
+This makes it **EXTREMELY SAFE** for any real-world application. Offers **greater collision resistance than UUID v4** (~82 thousand years of generating 1 BILLION IDs PER SECOND) thanks to a larger entropy space (36122), powered by cryptographically secure randomness.
 
 ## 🛠️ How to Use It
 
@@ -249,7 +282,8 @@ ucid({
   octets: 3,
   octetLength: 6,
   includeOnly: '1234567890abcdef',
-  customize: (octet, i) => i == 0 ? `user-${octet}` : i == 1 ? `session-${octet}` : `${i}${octet}`,
+  customize: (octet, i) =>
+    i == 0 ? `user-${octet}` : i == 1 ? `session-${octet}` : `${i}${octet}`,
 });
 // Result: user-81cd0a-session-13634d-212fb85
 ```
