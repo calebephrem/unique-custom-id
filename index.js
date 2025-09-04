@@ -1,4 +1,4 @@
-const { ucidGenerateId } = require('./utils.js');
+const ucidGenerateId = require('./ucid.gen.js');
 
 /**
  * Generates a customizable ID string using shuffled octets.
