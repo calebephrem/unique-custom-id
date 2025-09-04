@@ -4,7 +4,7 @@
   "description": "⚡️ Generate custom IDs like never before — fast, fun, and fully yours!",
   "main": "index.js",
   "bin": {
-    "ucid": "./bin/ucid.js"
+    "ucid": "./bin/cli.js"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const ucidGenerateId = require('../ucid.gen.js');
+const ucidGenerateId = require('../ucid.core.js');
 
 const args = process.argv.slice(2);
 const options = {};
