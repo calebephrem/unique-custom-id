@@ -1,6 +1,11 @@
 # 🎉 UCID
 
-🔑 _UCID stands for Unique Custom ID, The easiest, fastest, and most customizable ID generator you'll ever meet!_
+![version](https://img.shields.io/npm/v/unique-custom-id?label=version)
+![License](https://img.shields.io/github/license/calebephrem/unique-custom-id)
+![Downloads](https://img.shields.io/npm/dt/unique-custom-id)
+![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+
+🔑 _UCID stands for Unique Custom ID, the easiest, fastest, and most customizable ID generator you'll ever meet!_
 
 ## 💡 Why UCID?
 
@@ -22,7 +27,7 @@ npm install unique-custom-id
 
 UCID runs independently without any dependencies — just pure JavaScript magic ✨. It uses Fisher-Yates Shuffle, Crypto etc.
 
-**If you use the default options, even if you generate a BILLION IDs PER SECOND, you'd need trillions of years to have a meaningful chance of a collision.** You don't believe me?
+**If you use the default options, even if you generate 1 BILLION IDs PER SECOND, you'd need trillions of years to have a meaningful chance of a collision**. Sounds unbelievable? Let’s do the math:
 
 ### Collision Probability of Secure Random 32-Character ID (Base36)
 
@@ -51,9 +56,9 @@ UCID runs independently without any dependencies — just pure JavaScript magic 
 
 ### ✅ Conclusion
 
-Using cryptographically secure randomness, your custom 32-character base36 ID format would take **~252 million years** of generating **1 BILLION IDs PER SECOND** to reach a **50% chance of collision**. (note the "billion" and "per second")
+Using cryptographically secure randomness, your custom 32-character base36 ID format would take **~252 million years** of generating **1 BILLION IDs PER SECOND** to reach a **50% chance of collision**.
 
-This makes it **EXTREMELY SAFE** for any real-world application. Offers **greater collision resistance than UUID v4** (~82 thousand years of generating 1 BILLION IDs PER SECOND) thanks to a larger entropy space (36122), powered by cryptographically secure randomness.
+This makes it **EXTREMELY SAFE** for any real-world application. Offers **greater collision resistance than UUID v4** (~82 thousand years of generating 1 BILLION IDs PER SECOND) thanks to a larger entropy space (6.334 × 10^49), powered by cryptographically secure randomness.
 
 ## 🛠️ How to Use It
 
@@ -149,10 +154,10 @@ ucid({ includeOnly: '1234567890abcdef' });
 
 ### `timestamp` (string)
 
-Add timestamp to your id. Either `prefix` or `suffix`.
+Add timestamp to your ID. Either `prefix` or `suffix`.
 
-- `prefix`: before the id. Aliases: `prefix`, `p`, `pre`, `pref`
-- `suffix`: before the id. Aliases: `suffix`, `s`, `suf`, `suff`
+- `prefix`: before the ID. Aliases: `prefix`, `p`, `pre`, `pref`
+- `suffix`: after the ID. Aliases: `suffix`, `s`, `suf`, `suff`
 
 ```js
 ucid({
@@ -174,14 +179,14 @@ Controls how the timestamp is formatted.
 ucid({
   octets: 3,
   timestamp: 's',
-  timestampFormat: 'dd-mm-yyyy-hh:mm:ss:ms'
+  timestampFormat: 'dd-mm-yyyy-hh:mm:ss:ms',
 });
 // Result: gtrf9t1h-u00ycxuw-mxzhjuty-04-09-2025-12:09:00:39
 
 ucid({
   octets: 3,
   timestamp: 'p',
-  timestampFormat: 'unix'
+  timestampFormat: 'unix',
 });
 // Result: 1756976740-61p0xk4r-1ad6fg3l-gxwsgpgk
 ```
@@ -272,7 +277,7 @@ ucid({
 
 Returns a full object instead of just the generated ID string.
 
-If `verbose` is `true`, UCID will return an object containing the generated id and other options that were passed in.
+If `verbose` is `true`, UCID will return an object containing the generated ID and other options that were passed in.
 
 This is especially useful for logging, debugging, testing, or introspection. Default: `false`
 
@@ -362,7 +367,7 @@ If you’re thinking about improving UCID, fixing a bug, or just having fun, mak
 
 ## 🧸 Final Thoughts
 
-UCID is built for _fun_ and _flexibility_ — perfect for devs who want a secure, short, and sweet identifier in seconds.
+UCID is built for fun, flexibility, and speed — perfect for devs who want secure and customizable identifiers in milliseconds.
 
 ## 🌟 Give It a Try!
 

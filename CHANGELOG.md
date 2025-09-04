@@ -1,5 +1,11 @@
 # Change Log
 
+## `v2.5.1`
+
+### 🚀 Enhancements
+
+- Update docs
+
 ## `v2.5.0`
 
 ### 🚀 Enhancements
