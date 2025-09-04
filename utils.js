@@ -1,3 +1,5 @@
+const crypto = require('crypto');
+
 /**
  * Shuffles the characters in a string using the Fisher-Yates algorithm.
  * @param {string} str - The string to shuffle.
@@ -18,15 +20,6 @@ function shuffleStr(str) {
 }
 
 /**
- * Selects a random character from a given string pool.
- * @param {string} pool - A string containing characters to choose from.
- * @returns {string} A single randomly selected character.
- */
-function randChar(pool) {
-  return pool[Math.floor(Math.random() * pool.length)];
-}
-
-/**
  * Resolves the length of an octet based on format input.
  * @param {string|Array} octetFormat - Format string or array defining octet lengths.
  * @param {number} i - Index of the current octet.
@@ -44,4 +37,21 @@ function resolveFormat(octetFormat, i, defaultLen, sep) {
   return Number(formatStr[i]) || defaultLen;
 }
 
-module.exports = { shuffleStr, resolveFormat, randChar };
+/**
+ * Generates a cryptographically secure random character from a given charset.
+ *
+ * @param {string} charset - A string containing the set of characters to choose from.
+ * @returns {string} A single character randomly selected from the charset.
+ *
+ * @example
+ * const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+ * const char = secureRandChar(charset);
+ * console.log(char); // e.g., "g"
+ */
+
+const secureRandChar = (charset) => {
+  const byte = crypto.randomBytes(1)[0];
+  return charset[byte % charset.length];
+};
+
+module.exports = { shuffleStr, resolveFormat, secureRandChar };

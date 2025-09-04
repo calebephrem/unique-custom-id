@@ -1,4 +1,4 @@
-const { shuffleStr, resolveFormat, randChar } = require('./utils.js');
+const { shuffleStr, resolveFormat, secureRandChar } = require('./utils.js');
 
 /**
  * Generates a customizable ID string composed of shuffled octets.
@@ -87,7 +87,9 @@ function ucidGenerateId(options = {}) {
   const generateId = () => {
     const ids = Array.from({ length: octets }, (_, i) => {
       const len = resolveFormat(octetFormat, i, octetLength, octetSeparator);
-      const raw = Array.from({ length: len }, () => randChar(charset)).join('');
+      const raw = Array.from({ length: len }, () =>
+        secureRandChar(charset)
+      ).join('');
       const octet = shuffleStr(shuffleStr(raw));
       return typeof customize === 'function' ? customize(octet, i) : octet;
     });
