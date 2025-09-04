@@ -2,8 +2,13 @@ const crypto = require('crypto');
 
 /**
  * Shuffles the characters in a string using the Fisher-Yates algorithm.
- * @param {string} str - The string to shuffle.
+ *
+ * @function
+ * @param {string} str - The input string to shuffle.
  * @returns {string} - The shuffled string. Returns an empty string if input is invalid.
+ *
+ * @example
+ * shuffleStr('hello'); // -> "loelh"
  */
 function shuffleStr(str) {
   if (typeof str !== 'string') {
@@ -16,21 +21,34 @@ function shuffleStr(str) {
     const j = Math.floor(Math.random() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
+
   return arr.join('');
 }
 
 /**
- * @param {string} [format='yyyymmdd'] - Format string containing tokens to be replaced.
- * @returns {string} Formatted timestamp string.
+ * Returns a formatted timestamp string using a custom format.
+ *
+ * Supported tokens:
+ * - yyyy: Full year (e.g., 2025)
+ * - yy: Two-digit year (e.g., 25)
+ * - mm: Month (01-12)
+ * - dd: Day of the month (01-31)
+ * - hh: Hours (00-23)
+ * - min: Minutes (00-59)
+ * - ss: Seconds (00-59)
+ * - ms: Milliseconds (two-digit)
+ * - unix: Unix timestamp (seconds)
+ * - iso: ISO string
+ *
+ * @function
+ * @param {string} [format='yyyymmdd'] - Format string using supported tokens.
+ * @returns {string} - Formatted timestamp string.
+ *
+ * @example
+ * timeStamp('yyyy-mm-dd_hh:min:ss'); // -> "2025-09-04_18:40:22"
  */
-
 function timeStamp(format = 'yyyymmdd') {
-  if (!format) {
-    format = 'yyyymmdd';
-  }
-
   const now = new Date();
-
   const pad = (n, len = 2) => n.toString().padStart(len, '0');
 
   const replacements = {
@@ -53,38 +71,56 @@ function timeStamp(format = 'yyyymmdd') {
 }
 
 /**
- * Resolves the length of an octet based on format input.
- * @param {string|Array} octetFormat - Format string or array defining octet lengths.
+ * Resolves the length of an octet at a specific index based on the format input.
+ *
+ * Accepts array format: [4, 6, 8]
+ * Or string format with separator: "4-6-8"
+ *
+ * @function
+ * @param {string|Array<number>} octetFormat - Format definition.
  * @param {number} i - Index of the current octet.
- * @param {number} defaultLen - Default length if format is invalid.
- * @param {string} sep - Separator used in format string.
- * @returns {number} The resolved length for the current octet.
+ * @param {number} defaultLen - Fallback length if not specified.
+ * @param {string} sep - Separator (e.g., "-") for string format.
+ * @returns {number} - The resolved length.
+ *
+ * @example
+ * resolveFormat([4, 6, 8], 1, 8, '-') // -> 6
+ * resolveFormat("4-6-8", 2, 8, '-')  // -> 8
  */
 function resolveFormat(octetFormat, i, defaultLen, sep) {
   if (Array.isArray(octetFormat)) return Number(octetFormat[i]) || defaultLen;
+
   const formatStr = String(octetFormat);
   if (formatStr.includes(sep)) {
     const joined = formatStr.split(sep).join('');
     return Number(joined[i]) || defaultLen;
   }
+
   return Number(formatStr[i]) || defaultLen;
 }
 
 /**
- * Generates a cryptographically secure random character from a given charset.
+ * Securely picks a random character from a given charset using crypto.
  *
- * @param {string} charset - A string containing the set of characters to choose from.
- * @returns {string} A single character randomly selected from the charset.
+ * @function
+ * @param {string} charset - A string of allowed characters.
+ * @returns {string} - A single character from the charset.
  *
  * @example
- * const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
- * const char = secureRandChar(charset);
- * console.log(char); // e.g., "g"
+ * secureRandChar('abc123'); // -> "1"
  */
-
-const secureRandChar = (charset) => {
+function secureRandChar(charset) {
   const byte = crypto.randomBytes(1)[0];
   return charset[byte % charset.length];
-};
+}
 
-module.exports = { shuffleStr, resolveFormat, secureRandChar, timeStamp };
+/**
+ * @module utils
+ * @description Utility functions used in UCID generation.
+ */
+module.exports = {
+  shuffleStr,
+  resolveFormat,
+  secureRandChar,
+  timeStamp,
+};
