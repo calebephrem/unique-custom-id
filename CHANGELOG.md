@@ -1,5 +1,11 @@
 # Change Log
 
+## `v2.6.0`
+
+### 🚀 Enhancements
+
+- Add more date formatting options
+
 ## `v2.5.1`
 
 ### 🚀 Enhancements

@@ -3,6 +3,7 @@
 ![version](https://img.shields.io/npm/v/unique-custom-id?label=version)
 ![License](https://img.shields.io/github/license/calebephrem/unique-custom-id)
 ![Downloads](https://img.shields.io/npm/dt/unique-custom-id)
+![size](https://packagephobia.com/badge?p=unique-custom-id)
 ![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
 🔑 _UCID stands for Unique Custom ID, the easiest, fastest, and most customizable ID generator you'll ever meet!_
@@ -11,8 +12,8 @@
 
 Because it's...
 
-- 💿 **Compact** — Zero dependencies!
-- 🪶 **Lightweight** — Less than 30kb!
+- 💿 **Compact** — [Zero dependencies](https://www.npmjs.com/package/unique-custom-id?activeTab=dependencies)!
+- 🪶 **Lightweight** — Less than 50kb!
 - 🧠 **Simple** — Just call a single function and boom 💥: instant ID!
 - 🔐 **Secure** — Fresh, unique IDs every. single. time.
 - 🌀 **CLI** — spin up IDs faster than you can blink
@@ -25,9 +26,9 @@ npm install unique-custom-id
 
 ## 🧬 What’s Under the Hood?
 
-UCID runs independently without any dependencies — just pure JavaScript magic ✨. It uses Fisher-Yates Shuffle, Crypto etc.
+UCID runs independently without any [dependencies](https://www.npmjs.com/package/unique-custom-id?activeTab=dependencies) — just pure JavaScript magic ✨. It uses Fisher-Yates Shuffle, Crypto etc.
 
-**If you use the default options, even if you generate 1 BILLION IDs PER SECOND, you'd need trillions of years to have a meaningful chance of a collision**. Sounds unbelievable? Let’s do the math:
+**If you use the default options, even if you generate 1 BILLION IDs PER SECOND, you'd need hundreds of millions of years to have a meaningful chance of a collision**. Sounds unbelievable? Let’s do the math:
 
 ### Collision Probability of Secure Random 32-Character ID (Base36)
 
@@ -97,10 +98,15 @@ Control letter casing:
 - `uppercase`: `false` by default
 
 ```js
-ucid({ uppercase: true });
+ucid({
+  uppercase: true,
+});
 // Result: TevajtrU-Eei8SnWa-0EZqr6NE-jMAHX0D6
 
-ucid({ uppercase: true, lowercase: false });
+ucid({
+  uppercase: true,
+  lowercase: false,
+});
 // Result: FFJL9DAO-V3YPLZ2V-252L7URX-XCS3GWP5
 ```
 
@@ -112,10 +118,14 @@ Toggle digits or symbols:
 - `symbols`: `false` by default
 
 ```js
-ucid({ symbols: true });
+ucid({
+  symbols: true,
+});
 // Result: 5w55an#e-kw7bw7f3-7iomwp#o-dd79$yf1
 
-ucid({ numbers: false });
+ucid({
+  numbers: false,
+});
 // Result: jueldfjw-ljhiphtl-ajuptedx-rramdwne
 ```
 
@@ -124,10 +134,14 @@ ucid({ numbers: false });
 Set how many segments (octets) the ID should have. Default: `4`.
 
 ```js
-ucid({ octets: 3 });
+ucid({
+  octets: 3,
+});
 // Result: 4nlwrx87-fi65iq27-43wh2s05
 
-ucid({ octets: 6 });
+ucid({
+  octets: 6,
+});
 // Result: hr5bg68k-ycxqfb1o-pkofgsm2-j6hnimgy-ehcxulnl-ptmvuf3j
 ```
 
@@ -136,10 +150,14 @@ ucid({ octets: 6 });
 Define how long each octet should be. Default: `8`.
 
 ```js
-ucid({ octetLength: 4 });
+ucid({
+  octetLength: 4,
+});
 // Result: k6ue-bvfq-fc99-oe07
 
-ucid({ octetLength: 12 });
+ucid({
+  octetLength: 12,
+});
 // Result: nz4kkg3jxxot-9v9bmx6y8ngt-x4ciymz48z9d-mqopg9mad4v2
 ```
 
@@ -148,7 +166,9 @@ ucid({ octetLength: 12 });
 Use a custom character set to generate your ID:
 
 ```js
-ucid({ includeOnly: '1234567890abcdef' });
+ucid({
+  includeOnly: '1234567890abcdef',
+});
 // Result: f800cdb7-0082b1b8-f0736eb3-4b16949a
 ```
 
@@ -217,13 +237,22 @@ ucid({ octetSeparator: '~' });
 Set the **exact** length of each octet individually.
 
 ```js
-ucid({ octets: 3, octetFormat: '352' });
+ucid({
+  octets: 3,
+  octetFormat: '352',
+});
 // Result: h0c-hgkf0-k9
 
-ucid({ octets: 4, octetFormat: [2, 4, 6, 8] });
+ucid({
+  octets: 4,
+  octetFormat: [2, 4, 6, 8],
+});
 // Result: cb-udw8-e6m4wt-i9kim7xb
 
-ucid({ octets: 2, octetFormat: 49 });
+ucid({
+  octets: 2,
+  octetFormat: 49,
+});
 // Result: pr3e-piis0fdy9
 ```
 
@@ -280,6 +309,18 @@ ucid({
   template: 'user-%id-at-%ts',
 });
 // Result: user-26001cde-at-20250903
+```
+
+### `prefix` and `suffix` (string)
+
+Add static strings before or after your ID.
+
+```js
+ucid({
+  prefix: 'ID-',
+  suffix: '-done',
+});
+// Result: ID-k0ebaf6m-j31g7koc-b25p0p2n-u9iah5i4-done
 ```
 
 ### `verbose` (boolean)
@@ -372,7 +413,7 @@ console.log(sha);
 ## 🤝 Want to Contribute?
 
 We love contributions! 💙  
-If you’re thinking about improving UCID, fixing a bug, or just having fun, make sure to read the [contributing guide](https://github.com/calebephrem/unique-custom-id/blob/main/CONTRIBUTING.md) before you start. It’s got everything you need to know to get up and running! 🚀
+If you’re thinking about improving [UCID](https://github.com/calebephrem/unique-custom-id), fixing a [bug](https://github.com/calebephrem/unique-custom-id/issues), or just having fun, make sure to read the [contributing guide](./CONTRIBUTING.md) before you start. It’s got everything you need to know to get up and running! 🚀
 
 ## 🧸 Final Thoughts
 
