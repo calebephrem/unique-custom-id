@@ -60,12 +60,63 @@ function timeStamp(format = 'yyyymmdd') {
     min: pad(now.getMinutes()),
     ss: pad(now.getSeconds()),
     ms: pad(Math.floor(now.getMilliseconds() / 10)),
+    epoch: Math.floor(now.getTime() / 1000),
     unix: Math.floor(now.getTime() / 1000),
+    military: `${now.getHours().toString().padStart(2, '0')}${now
+      .getMinutes()
+      .toString()
+      .padStart(2, '0')}${now.getSeconds().toString().padStart(2, '0')}`,
     iso: now.toISOString(),
+    utc: `${now.getUTCFullYear()}-${(now.getUTCMonth() + 1)
+      .toString()
+      .padStart(2, '0')}-${now.getUTCDate().toString().padStart(2, '0')}T${now
+      .getUTCHours()
+      .toString()
+      .padStart(2, '0')}:${now
+      .getUTCMinutes()
+      .toString()
+      .padStart(2, '0')}:${now.getUTCSeconds().toString().padStart(2, '0')}Z`,
+
+    rfc: `${now.getFullYear()}-${(now.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}T${now
+      .getHours()
+      .toString()
+      .padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now
+      .getSeconds()
+      .toString()
+      .padStart(2, '0')}${(() => {
+      const offset = -now.getTimezoneOffset();
+      const sign = offset >= 0 ? '+' : '-';
+      const hh = Math.floor(Math.abs(offset) / 60)
+        .toString()
+        .padStart(2, '0');
+      const mm = (Math.abs(offset) % 60).toString().padStart(2, '0');
+      return `${sign}${hh}:${mm}`;
+    })()}`,
+    rfc3339: `${now.getFullYear()}-${(now.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}T${now
+      .getHours()
+      .toString()
+      .padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now
+      .getSeconds()
+      .toString()
+      .padStart(2, '0')}${(() => {
+      const offset = -now.getTimezoneOffset();
+      const sign = offset >= 0 ? '+' : '-';
+      const hh = Math.floor(Math.abs(offset) / 60)
+        .toString()
+        .padStart(2, '0');
+      const mm = (Math.abs(offset) % 60).toString().padStart(2, '0');
+      return `${sign}${hh}:${mm}`;
+    })()}`,
+    filetime: now.getTime() * 10000 + 116444736000000000,
+    winft: now.getTime() * 10000 + 116444736000000000,
   };
 
   return format.replace(
-    /yyyy|yy|mm|dd|hh|min|ss|ms|unix|iso/g,
+    /yyyy|yy|mm|dd|hh|min|ss|ms|unix|epoch|military|iso|utc|rfc|filetime|winft/g,
     (token) => replacements[token] ?? token
   );
 }

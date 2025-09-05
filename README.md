@@ -175,6 +175,15 @@ ucid({
 
 Controls how the timestamp is formatted.
 
+You can use whatever format you like. yyyy-mm-dd, mm-dd-yy, however you like it, with additional predefined formats:
+
+- unix / epoch
+- military
+- iso
+- utc
+- rfc (rfc3339)
+- filetime / winft (Windows FILETIME)
+
 ```js
 ucid({
   octets: 3,
