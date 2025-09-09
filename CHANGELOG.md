@@ -1,5 +1,11 @@
 # Change Log
 
+## `v2.7.0`
+
+### 🚀 Enhancements
+
+- Add `condition` option to ucid
+
 ## `v2.6.0`
 
 ### 🚀 Enhancements

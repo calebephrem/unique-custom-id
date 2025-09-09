@@ -26,6 +26,8 @@ const {
  * @param {string} [options.suffix=''] - Optional string to append after the generated ID.
  * @param {boolean} [options.verbose=false] - If true, returns metadata including the ID and resolved options.
  * @param {number} [options.instances=1] - Number of IDs to generate (≥1).
+ * @param {(resolve: Function, reject: Function) => void} [options.condition=null] - Optional function that must call resolve() to allow ID generation, or reject(message) to block it.
+
  * @param {(octet: string, index: number) => string} [options.customize=null] - Optional function to modify each octet before joining.
  * @returns {string|Object|Array<string|Object>} - Returns the generated ID string(s), or verbose object(s) if `verbose` is true.
  *
@@ -51,6 +53,7 @@ function ucidGenerateId(options = {}) {
     suffix: '',
     verbose: false,
     customize: null,
+    condition: null,
   };
 
   const {
@@ -71,7 +74,28 @@ function ucidGenerateId(options = {}) {
     suffix,
     verbose,
     customize,
+    condition,
   } = { ...defaults, ...options };
+  if (typeof condition === 'function') {
+    let allowed = false;
+    let error = null;
+
+    condition(
+      () => (allowed = true),
+      (msg) => {
+        allowed = false;
+        error = msg || 'UCID condition rejected.';
+      }
+    );
+
+    if (!allowed) {
+      if (error instanceof Error) {
+        throw error;
+      }
+      console.error(error);
+      return;
+    }
+  }
 
   if (octets <= 0) throw new Error('Octets must be greater than 0');
   if (octetLength <= 0) throw new Error('OctetLength must be greater than 0');

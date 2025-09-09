@@ -382,6 +382,41 @@ ucid({
 // Result: user-81cd0a-session-13634d-212fb85
 ```
 
+### `condition` (null | ((resolve: Function, reject: Function) => void))
+
+Optional function that acts as a gate before UCID generation begins.  
+It must call `resolve()` to allow generation or `reject(msg)` to skip it.
+
+If `reject()` is called, UCID generation is aborted, and the ucid function returns `undefined`.  
+If `reject()` is passed an `Error` object, it will be thrown. Otherwise, the error message is logged.
+
+```js
+// Allow generation only in production
+ucid({
+  condition: (resolve, reject) =>
+    process.env.NODE_ENV === 'production'
+      ? resolve()
+      : reject('UCID generation is disabled in non-production environments.'),
+});
+
+// Time-based restriction
+ucid({
+  condition: (resolve, reject) => {
+    const hour = new Date().getHours();
+    if (hour >= 9 && hour <= 17) resolve();
+    else reject('UCIDs can only be generated during business hours.');
+  },
+});
+
+// Check authentication
+ucid({
+  condition: (resolve, reject) =>
+    auth?.currentUser?.email
+      ? resolve()
+      : reject(new Error('User must be authenticated.')),
+});
+```
+
 ## 🧪 Use Case Examples
 
 ### UUID Generator
