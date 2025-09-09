@@ -27,7 +27,7 @@ const ucidGenerateId = require('./ucid.core.js');
  * @returns {string|Object|Array<string|Object>} - Returns the generated ID string(s), or verbose object(s) if `verbose` is true.
  *
  * @example
- * ucidGenerateId(); // -> "ac1d2f3e-d4e5f6g7-h8i9j0k1-l2m3n4o5"
+ * ucid(); // -> "ac1d2f3e-d4e5f6g7-h8i9j0k1-l2m3n4o5"
  */
 function ucid(options = {}) {
   return ucidGenerateId(options);

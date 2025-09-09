@@ -18,12 +18,6 @@ Because it's...
 - 🔐 **Secure** — Fresh, unique IDs every. single. time.
 - 🌀 **CLI** — spin up IDs faster than you can blink
 
-## 📦 Installation
-
-```sh
-npm install unique-custom-id
-```
-
 ## 🧬 What’s Under the Hood?
 
 UCID runs independently without any [dependencies](https://www.npmjs.com/package/unique-custom-id?activeTab=dependencies) — just pure JavaScript magic ✨. It uses Fisher-Yates Shuffle, Crypto etc.
@@ -62,6 +56,12 @@ Using cryptographically secure randomness, your custom 32-character base36 ID fo
 This makes it **EXTREMELY SAFE** for any real-world application. Offers **greater collision resistance than UUID v4** (~82 thousand years of generating 1 BILLION IDs PER SECOND) thanks to a larger entropy space (6.334 × 10^49), powered by cryptographically secure randomness.
 
 ## 🛠️ How to Use It
+
+### 📦 Installation
+
+```sh
+npm install unique-custom-id
+```
 
 ### ➕ Importing
 

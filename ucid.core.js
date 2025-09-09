@@ -106,7 +106,7 @@ function ucidGenerateId(options = {}) {
       uppercase && 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
       lowercase && 'abcdefghijklmnopqrstuvwxyz',
       numbers && '0123456789',
-      symbols && '!#$%&',
+      symbols && '!$%&',
     ]
       .filter(Boolean)
       .join('');
@@ -144,7 +144,7 @@ function ucidGenerateId(options = {}) {
   // Use template mode (overrides normal generation)
   if (typeof template === 'string') {
     /**
-     * Generates an ID using the template pattern.
+     * Generates an ID using the template pattern (overrides normal generation)
      * @private
      * @returns {string}
      */

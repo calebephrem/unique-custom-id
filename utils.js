@@ -156,9 +156,6 @@ function resolveFormat(octetFormat, i, defaultLen, sep) {
  * @function
  * @param {string} charset - A string of allowed characters.
  * @returns {string} - A single character from the charset.
- *
- * @example
- * secureRandChar('abc123'); // -> "1"
  */
 function secureRandChar(charset) {
   const byte = crypto.randomBytes(1)[0];

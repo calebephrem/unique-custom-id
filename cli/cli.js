@@ -101,7 +101,6 @@ args.forEach((arg) => {
       case 'help':
         console.log(helpText);
         process.exit(0);
-        break;
 
       default:
         console.warn(`Unknown option: --${key}`);
