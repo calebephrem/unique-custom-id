@@ -3,7 +3,7 @@ const {
   resolveFormat,
   secureRandChar,
   timeStamp,
-} = require('./utils');
+} = require("./utils");
 
 /**
  * Generates a customizable and optionally verbose Unique Custom ID (UCID).
@@ -13,6 +13,7 @@ const {
  * @param {number} [options.octets=4] - Number of octets in the ID (must be > 0).
  * @param {number} [options.octetLength=8] - Default length of each octet.
  * @param {string|Array<number>} [options.octetFormat=''] - Custom format for octet lengths, e.g., [4,6,8] or "4-6-8".
+ * @param {string|null} [options.idFormat=''] - Predefined ID format that sets multiple options.
  * @param {boolean} [options.uppercase=false] - Whether to include uppercase A–Z characters.
  * @param {boolean} [options.lowercase=true] - Whether to include lowercase a–z characters.
  * @param {boolean} [options.numbers=true] - Whether to include digits 0–9.
@@ -40,28 +41,30 @@ function ucidGenerateId(options = {}) {
     uppercase: false,
     lowercase: true,
     octetLength: 8,
-    octetFormat: '',
+    octetFormat: "",
+    idFormat: null,
     instances: 1,
     numbers: true,
-    octetSeparator: '-',
+    octetSeparator: "-",
     symbols: false,
     includeOnly: null,
     timestamp: null,
     timestampFormat: null,
     template: null,
-    prefix: '',
-    suffix: '',
+    prefix: "",
+    suffix: "",
     verbose: false,
     customize: null,
     condition: null,
   };
 
-  const {
+  let {
     octets,
     uppercase,
     lowercase,
     octetLength,
     octetFormat,
+    idFormat,
     instances,
     numbers,
     octetSeparator,
@@ -76,7 +79,7 @@ function ucidGenerateId(options = {}) {
     customize,
     condition,
   } = { ...defaults, ...options };
-  if (typeof condition === 'function') {
+  if (typeof condition === "function") {
     let allowed = false;
     let error = null;
 
@@ -84,7 +87,7 @@ function ucidGenerateId(options = {}) {
       () => (allowed = true),
       (msg) => {
         allowed = false;
-        error = msg || 'UCID condition rejected.';
+        error = msg || "UCID condition rejected.";
       }
     );
 
@@ -97,22 +100,37 @@ function ucidGenerateId(options = {}) {
     }
   }
 
-  if (octets <= 0) throw new Error('Octets must be greater than 0');
-  if (octetLength <= 0) throw new Error('OctetLength must be greater than 0');
+  if (octets <= 0) throw new Error("Octets must be greater than 0");
+  if (octetLength <= 0) throw new Error("OctetLength must be greater than 0");
+
+  if (idFormat && typeof idFormat === "string") {
+    switch (idFormat.toLowerCase()) {
+      case "uuid":
+        octets = 5;
+        octetFormat = [8, 4, 4, 4, 12];
+        includeOnly = "1234567890abcdef";
+        break;
+      case "sha":
+        octets = 5;
+        octetSeparator = "";
+        includeOnly = "1234567890abcdef";
+        break;
+    }
+  }
 
   const charset =
     includeOnly ||
     [
-      uppercase && 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-      lowercase && 'abcdefghijklmnopqrstuvwxyz',
-      numbers && '0123456789',
-      symbols && '!$%&',
+      uppercase && "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      lowercase && "abcdefghijklmnopqrstuvwxyz",
+      numbers && "0123456789",
+      symbols && "!$%&",
     ]
       .filter(Boolean)
-      .join('');
+      .join("");
 
   if (!charset) {
-    throw new Error('Character set is empty. Adjust your options.');
+    throw new Error("Character set is empty. Adjust your options.");
   }
 
   /**
@@ -125,24 +143,24 @@ function ucidGenerateId(options = {}) {
       const len = resolveFormat(octetFormat, i, octetLength, octetSeparator);
       const raw = Array.from({ length: len }, () =>
         secureRandChar(charset)
-      ).join('');
+      ).join("");
       const octet = shuffleStr(shuffleStr(raw));
-      return typeof customize === 'function' ? customize(octet, i) : octet;
+      return typeof customize === "function" ? customize(octet, i) : octet;
     });
 
     return `${prefix}${
-      ['prefix', 'p', 'pre', 'pref'].includes(timestamp)
+      ["prefix", "p", "pre", "pref"].includes(timestamp)
         ? timeStamp(timestampFormat) + octetSeparator
-        : ''
+        : ""
     }${ids.join(octetSeparator)}${
-      ['suffix', 's', 'suf', 'suff'].includes(timestamp)
+      ["suffix", "s", "suf", "suff"].includes(timestamp)
         ? octetSeparator + timeStamp(timestampFormat)
-        : ''
+        : ""
     }${suffix}`;
   };
 
   // Use template mode (overrides normal generation)
-  if (typeof template === 'string') {
+  if (typeof template === "string") {
     /**
      * Generates an ID using the template pattern (overrides normal generation)
      * @private

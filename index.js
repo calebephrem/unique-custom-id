@@ -8,6 +8,7 @@ const ucidGenerateId = require('./ucid.core.js');
  * @param {number} [options.octets=4] - Number of octets in the ID (must be > 0).
  * @param {number} [options.octetLength=8] - Default length of each octet.
  * @param {string|Array<number>} [options.octetFormat=''] - Custom format for octet lengths, e.g., [4,6,8] or "4-6-8".
+ * @param {string|null} [options.idFormat=''] - Predefined ID format that sets multiple options.
  * @param {boolean} [options.uppercase=false] - Whether to include uppercase A–Z characters.
  * @param {boolean} [options.lowercase=true] - Whether to include lowercase a–z characters.
  * @param {boolean} [options.numbers=true] - Whether to include digits 0–9.

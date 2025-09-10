@@ -36,6 +36,7 @@ npm run ucid
 | --instances       | Number of IDs to generate                                 | 1       |
 | --octetSeparator  | Separator character between segments                      | '-'     |
 | --octetFormat     | Custom format for octet lengths                           | ''      |
+| --idFormat        | Predefined ID format that sets multiple options.          | null    |
 | --includeOnly     | Use only the provided characters                          | null    |
 | --timestamp       | Include timestamp in the id, either 'prefix' or 'suffix'. | null    |
 | --timestampFormat | The format of the timestamp in the id.                    | null    |

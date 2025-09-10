@@ -256,6 +256,22 @@ ucid({
 // Result: pr3e-piis0fdy9
 ```
 
+### `idFormat` (string)
+
+Generate id with predefined formats
+
+```js
+ucid({
+  idFormat: 'uuid'
+});
+// Result: fab50a3a-bb8f-ff37-434b-5bbcd94d1167
+
+ucid({
+  idFormat: 'sha'
+});
+// Result: f1e1a9ae50951ff9d68b82743095a3ab273ebe97
+```
+
 ### `instances` (number)
 
 Number of IDs to generate.
@@ -415,34 +431,6 @@ ucid({
       ? resolve()
       : reject(new Error('User must be authenticated.')),
 });
-```
-
-## 🧪 Use Case Examples
-
-### UUID Generator
-
-```js
-const uuid = ucid({
-  octets: 5,
-  octetFormat: [8, 4, 4, 4, 12],
-  includeOnly: '1234567890abcdef',
-});
-
-console.log(uuid);
-// Result: 9803fa1b-e760-6765-30af-a2d7a389c5f6
-```
-
-### SHA-like ID
-
-```js
-const sha = ucid({
-  octets: 1,
-  octetLength: 40,
-  includeOnly: '1234567890abcdef',
-});
-
-console.log(sha);
-// Result: 7ca8f13c663210d577a82fd91aa39227f24d2791
 ```
 
 ## 🤝 Want to Contribute?
