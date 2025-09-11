@@ -10,7 +10,7 @@
  *   npx unique-custom-id --octets=3 --octetLength=6 --prefix="user-"
  */
 
-const ucidGenerateId = require("../ucid.core.js");
+const ucidGenerateId = require('../ucid.core.js');
 
 const args = process.argv.slice(2);
 const options = {};
@@ -48,63 +48,65 @@ Examples:
 `;
 
 args.forEach((arg) => {
-  if (arg.startsWith("--")) {
-    const [rawKey, rawVal] = arg.slice(2).split("=");
+  if (arg.startsWith('--')) {
+    const [rawKey, rawVal] = arg.slice(2).split('=');
     const key = rawKey.trim();
     const value = rawVal?.trim();
 
     switch (key) {
       // Boolean flags (true if present without value)
-      case "uppercase":
-      case "lowercase":
-      case "numbers":
-      case "symbols":
-        options[key] = value === undefined ? true : value === "true";
+      case 'uppercase':
+      case 'lowercase':
+      case 'numbers':
+      case 'symbols':
+        options[key] = value === undefined ? true : value === 'true';
         break;
 
-      case "no-numbers":
+      case 'no-numbers':
         options.numbers = false;
         break;
 
       // Number options
-      case "octets":
-      case "octetLength":
-      case "instances":
+      case 'octets':
+      case 'octetLength':
+      case 'instances':
         options[key] = Number(value);
         break;
 
       // Renamed or aliased options
-      case "separator":
+      case 'octetSeparator':
+      case 'separator':
+      case 'sep':
         options.octetSeparator = value;
         break;
 
-      case "format":
-      case "octetFormat":
+      case 'octetFormat':
         options.octetFormat = value;
         break;
 
-      case "idFormat":
+      case 'idFormat':
+      case 'format':
         options.idFormat = value;
         break;
 
       // String options
-      case "octetSeparator":
-      case "octetFormat":
-      case "includeOnly":
-      case "timestamp":
-      case "timestampFormat":
-      case "prefix":
-      case "suffix":
-      case "template":
+      case 'octetSeparator':
+      case 'octetFormat':
+      case 'includeOnly':
+      case 'timestamp':
+      case 'timestampFormat':
+      case 'prefix':
+      case 'suffix':
+      case 'template':
         options[key] = value;
         break;
 
       // Boolean flag (does not accept value)
-      case "verbose":
+      case 'verbose':
         options.verbose = true;
         break;
 
-      case "help":
+      case 'help':
         console.log(helpText);
         process.exit(0);
 
@@ -120,6 +122,6 @@ try {
   const result = ucidGenerateId(options);
   console.log(result);
 } catch (err) {
-  console.error("Error:", err.message);
+  console.error('Error:', err.message);
   process.exit(1);
 }

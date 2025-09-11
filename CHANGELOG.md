@@ -1,5 +1,19 @@
 # Change Log
 
+## `v2.8.0`
+
+### 🚀 Enhancements
+
+- Add `idFormat` option to ucid and ucid cli
+- `--format` cli option defaults to `--idFormat`
+- `--sep` cli option defaults to `--octetSeparator`
+- `--separator` cli option defaults to `--octetSeparator`
+
+### ❤️ Contributors
+
+- [@abenezertegegne](https://github.com/abenezertegegne)
+- [@calebephrem](https://github.com/calebephrem)
+
 ## `v2.7.0`
 
 ### 🚀 Enhancements
@@ -22,8 +36,8 @@
 
 ### 🚀 Enhancements
 
-- Add `timestamp` option to UCID and UCID cli
-- Add `timestampFormat` option to UCID and UCID cli
+- Add `timestamp` option to ucid and ucid cli
+- Add `timestampFormat` option to ucid and ucid cli
 
 ## `v2.4.0`
 
@@ -41,32 +55,32 @@
 
 ### 🚀 Enhancements
 
-- Add `instances` option to UCID and UCID cli
-- Add more options to UCID cli
+- Add `instances` option to ucid and ucid cli
+- Add more options to ucid cli
 
 ## `v2.2.0`
 
 ### 🚀 Enhancements
 
-- Add `customize` option to UCID
-- Add `verbose` option to UCID and UCID cli
+- Add `customize` option to ucid
+- Add `verbose` option to ucid and ucid cli
 - Add `%ts` to `template` option to inject timestamp
 
 ## `v2.1.0`
 
 ### 🚀 Enhancements
 
-- Add `template` option to UCID and UCID cli
+- Add `template` option to ucid and ucid cli
 
 ## `v2.0.0`
 
 ### ✨ Introduced
 
-- UCID cli
+- ucid cli
 
 ### 🚀 Enhancements
 
-- Add `prefix` and `suffix` options to UCID and UCID cli
+- Add `prefix` and `suffix` options to ucid and ucid cli
 
 ## `v1.0.0`
 

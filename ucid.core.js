@@ -3,7 +3,7 @@ const {
   resolveFormat,
   secureRandChar,
   timeStamp,
-} = require("./utils");
+} = require('./utils');
 
 /**
  * Generates a customizable and optionally verbose Unique Custom ID (UCID).
@@ -41,18 +41,18 @@ function ucidGenerateId(options = {}) {
     uppercase: false,
     lowercase: true,
     octetLength: 8,
-    octetFormat: "",
+    octetFormat: '',
     idFormat: null,
     instances: 1,
     numbers: true,
-    octetSeparator: "-",
+    octetSeparator: '-',
     symbols: false,
     includeOnly: null,
     timestamp: null,
     timestampFormat: null,
     template: null,
-    prefix: "",
-    suffix: "",
+    prefix: '',
+    suffix: '',
     verbose: false,
     customize: null,
     condition: null,
@@ -79,7 +79,7 @@ function ucidGenerateId(options = {}) {
     customize,
     condition,
   } = { ...defaults, ...options };
-  if (typeof condition === "function") {
+  if (typeof condition === 'function') {
     let allowed = false;
     let error = null;
 
@@ -87,7 +87,7 @@ function ucidGenerateId(options = {}) {
       () => (allowed = true),
       (msg) => {
         allowed = false;
-        error = msg || "UCID condition rejected.";
+        error = msg || 'UCID condition rejected.';
       }
     );
 
@@ -100,20 +100,78 @@ function ucidGenerateId(options = {}) {
     }
   }
 
-  if (octets <= 0) throw new Error("Octets must be greater than 0");
-  if (octetLength <= 0) throw new Error("OctetLength must be greater than 0");
+  if (octets <= 0) throw new Error('Octets must be greater than 0');
+  if (octetLength <= 0) throw new Error('OctetLength must be greater than 0');
 
-  if (idFormat && typeof idFormat === "string") {
+  if (idFormat && typeof idFormat === 'string') {
     switch (idFormat.toLowerCase()) {
-      case "uuid":
+      case 'uuid':
+      case 'uuidv4':
+      case 'universal':
+      case 'universal-id':
         octets = 5;
         octetFormat = [8, 4, 4, 4, 12];
-        includeOnly = "1234567890abcdef";
+        includeOnly = '1234567890abcdef';
         break;
-      case "sha":
+
+      case 'sha':
+      case 'sha1':
         octets = 5;
-        octetSeparator = "";
-        includeOnly = "1234567890abcdef";
+        octetSeparator = '';
+        includeOnly = '1234567890abcdef';
+        break;
+
+      case 'sha256':
+        octets = 8;
+        octetSeparator = '';
+        includeOnly = '1234567890abcdef';
+        break;
+
+      case 'object':
+      case 'objectid':
+      case 'object-id':
+        octets = 3;
+        octetFormat = [8, 4, 8];
+        includeOnly = '1234567890abcdef';
+        octetSeparator = '';
+        break;
+
+      case 'ulid':
+        octets = 2;
+        octetLength = 13;
+        lowercase = false;
+        uppercase = true;
+        octetSeparator = '';
+        break;
+
+      case 'nanoid':
+      case 'nano-id':
+      case 'nano':
+        octets = 1;
+        octetLength = 21;
+        uppercase = true;
+        octetSeparator = '';
+        break;
+
+      case 'ksuid':
+        octets = 1;
+        octetLength = 27;
+        uppercase = true;
+        octetSeparator = '';
+        break;
+
+      case 'cuid':
+        octets = 3;
+        octetSeparator = '';
+        prefix = 'c';
+        break;
+
+      case 'snowflake':
+      case 'snowflake-id':
+        octets = 3;
+        octetLength = 6;
+        octetSeparator = '';
+        includeOnly = '1234567890';
         break;
     }
   }
@@ -121,16 +179,16 @@ function ucidGenerateId(options = {}) {
   const charset =
     includeOnly ||
     [
-      uppercase && "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-      lowercase && "abcdefghijklmnopqrstuvwxyz",
-      numbers && "0123456789",
-      symbols && "!$%&",
+      uppercase && 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      lowercase && 'abcdefghijklmnopqrstuvwxyz',
+      numbers && '0123456789',
+      symbols && '!$%&',
     ]
       .filter(Boolean)
-      .join("");
+      .join('');
 
   if (!charset) {
-    throw new Error("Character set is empty. Adjust your options.");
+    throw new Error('Character set is empty. Adjust your options.');
   }
 
   /**
@@ -143,24 +201,24 @@ function ucidGenerateId(options = {}) {
       const len = resolveFormat(octetFormat, i, octetLength, octetSeparator);
       const raw = Array.from({ length: len }, () =>
         secureRandChar(charset)
-      ).join("");
+      ).join('');
       const octet = shuffleStr(shuffleStr(raw));
-      return typeof customize === "function" ? customize(octet, i) : octet;
+      return typeof customize === 'function' ? customize(octet, i) : octet;
     });
 
     return `${prefix}${
-      ["prefix", "p", "pre", "pref"].includes(timestamp)
+      ['prefix', 'p', 'pre', 'pref'].includes(timestamp)
         ? timeStamp(timestampFormat) + octetSeparator
-        : ""
+        : ''
     }${ids.join(octetSeparator)}${
-      ["suffix", "s", "suf", "suff"].includes(timestamp)
+      ['suffix', 's', 'suf', 'suff'].includes(timestamp)
         ? octetSeparator + timeStamp(timestampFormat)
-        : ""
+        : ''
     }${suffix}`;
   };
 
   // Use template mode (overrides normal generation)
-  if (typeof template === "string") {
+  if (typeof template === 'string') {
     /**
      * Generates an ID using the template pattern (overrides normal generation)
      * @private

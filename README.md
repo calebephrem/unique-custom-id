@@ -258,18 +258,33 @@ ucid({
 
 ### `idFormat` (string)
 
-Generate id with predefined formats
+Generate id with predefined formats. Many of them have aliases.
+
+- uuid / uuidv4 / universal / universal-id
+- sha / sha1
+- sha256
+- objectid / object / object-id
+- ulid
+- nanoid / nano-id / nano
+- ksuid
+- cuid
+- snowflake / snowflake-id
 
 ```js
 ucid({
-  idFormat: 'uuid'
+  idFormat: 'uuid' // uuidv4, universal also works
 });
 // Result: fab50a3a-bb8f-ff37-434b-5bbcd94d1167
 
 ucid({
-  idFormat: 'sha'
+  idFormat: 'sha' // sha1 also works
 });
 // Result: f1e1a9ae50951ff9d68b82743095a3ab273ebe97
+
+ucid({
+  idFormat: 'nanoid' // nano also works
+})
+// Result: HQMFVMRMCkXIvtLWhT8ty
 ```
 
 ### `instances` (number)
