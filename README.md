@@ -256,37 +256,6 @@ ucid({
 // Result: pr3e-piis0fdy9
 ```
 
-### `idFormat` (string)
-
-Generate id with predefined formats. Many of them have aliases.
-
-- uuid / uuidv4 / universal / universal-id
-- sha / sha1
-- sha256
-- objectid / object / object-id
-- ulid
-- nanoid / nano-id / nano
-- ksuid
-- cuid
-- snowflake / snowflake-id
-
-```js
-ucid({
-  idFormat: 'uuid' // uuidv4, universal also works
-});
-// Result: fab50a3a-bb8f-ff37-434b-5bbcd94d1167
-
-ucid({
-  idFormat: 'sha' // sha1 also works
-});
-// Result: f1e1a9ae50951ff9d68b82743095a3ab273ebe97
-
-ucid({
-  idFormat: 'nanoid' // nano also works
-})
-// Result: HQMFVMRMCkXIvtLWhT8ty
-```
-
 ### `instances` (number)
 
 Number of IDs to generate.
@@ -437,6 +406,56 @@ ucid({
       ? resolve()
       : reject(new Error('User must be authenticated.')),
 });
+```
+
+## Predefined Formats
+
+You don't have to memorize and write all those [configuration options](#-configuration-options). UCID contains predefined id formats like uuid, nanoid, cuid etc.
+
+It uses the default configuration options in the back. For example:
+
+```js
+ucid.format('uuid');
+// Result: afe5791b-788a-0c72-dc61-34b008e3fd98
+```
+
+On the back:
+
+```js
+ucid({
+  octets: 5,
+  octetFormat: [8, 4, 4, 4, 12],
+  includeOnly: '1234567890abcdef',
+});
+// Result: afe5791b-788a-0c72-dc61-34b008e3fd98
+```
+
+There are many predefined formats in UCID. Those predefined formats maybe existing or custom formats. Many of them have aliases.
+
+- uuid / uuidv4 / universal / universal-id
+- sha / sha1
+- sha256
+- objectid / object / object-id
+- ulid
+- nanoid / nano-id / nano
+- ksuid
+- cuid
+- snowflake / snowflake-id
+- hex / hexadecimal
+- shortuuid / short-uuid / short-uuidv4
+
+```js
+ucid.format('uuid'); // uuidv4, universal or universal-id also works
+// Result: 368463db-db52-768a-499b-88e1b6698036
+
+ucid.format('sha');
+// Result: b216a7459df37c38b701ac2b5ad1ad5c634260f2
+
+ucid.format('nanoid');
+// Result: G3diDfj4Y4dZtjFxke9Js
+
+ucid.format('cuid');
+// Result: c25u32ul06423krgbcuygdpce
 ```
 
 ## 🤝 Want to Contribute?

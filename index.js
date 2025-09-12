@@ -1,4 +1,5 @@
 const ucidGenerateId = require('./ucid.core.js');
+const ucidFromFormat = require('./ucid.format.js');
 
 /**
  * Generates a customizable and optionally verbose Unique Custom ID (UCID).
@@ -8,7 +9,6 @@ const ucidGenerateId = require('./ucid.core.js');
  * @param {number} [options.octets=4] - Number of octets in the ID (must be > 0).
  * @param {number} [options.octetLength=8] - Default length of each octet.
  * @param {string|Array<number>} [options.octetFormat=''] - Custom format for octet lengths, e.g., [4,6,8] or "4-6-8".
- * @param {string|null} [options.idFormat=''] - Predefined ID format that sets multiple options.
  * @param {boolean} [options.uppercase=false] - Whether to include uppercase A–Z characters.
  * @param {boolean} [options.lowercase=true] - Whether to include lowercase a–z characters.
  * @param {boolean} [options.numbers=true] - Whether to include digits 0–9.
@@ -33,5 +33,17 @@ const ucidGenerateId = require('./ucid.core.js');
 function ucid(options = {}) {
   return ucidGenerateId(options);
 }
+
+/**
+ * Generate IDs based on predefined formats
+ *
+ * @param {string} format
+ * @returns {string}- Returns the generated ID string
+ * @example
+ * ucid.format('uuid') // -> 74b0e07f-66e2-bae9-8198-b7d26867e912
+ */
+ucid.format = function (format) {
+  return ucidFromFormat(format);
+};
 
 module.exports = ucid;

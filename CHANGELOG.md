@@ -1,5 +1,16 @@
 # Change Log
 
+## `v3.0.0`
+
+### ✨ Introduced
+
+- `ucid.format` - contains predefined id formats
+
+### 🛠️ Fixes
+
+- Remove `idFormat` option in ucid
+- Remove `--idFormat` alias to `--format` option in ucid cli
+
 ## `v2.8.1`
 
 ### 🛠️ Fixes

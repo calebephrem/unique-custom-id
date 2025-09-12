@@ -11,6 +11,7 @@
  */
 
 const ucidGenerateId = require('../ucid.core.js');
+const ucidFromFormat = require('../ucid.format.js');
 
 const args = process.argv.slice(2);
 const options = {};
@@ -27,18 +28,18 @@ Options:
   --numbers                   Include numeric characters (0–9)
   --no-numbers                Disable numeric characters
   --symbols                   Include symbols (default: false)
-  --octets=<number>           Number of ID segments (default: 4)
-  --octetLength=<number>      Length of each segment (default: 8)
-  --instances=<number>        Number of IDs to generate
-  --octetSeparator=<char>     Separator character between segments (default: "-")
-  --idFormat                  Predefined ID format that sets multiple options.
-  --octetFormat=<format>      Custom format for octet lengths, e.g. "4-6-8"
-  --includeOnly=<chars>       Use only the provided characters
-  --timestamp=<prefix|suffix> Include timestamp in the ID
-  --timestampFormat=<format> Timestamp format (e.g., yyyy-mm-dd)
-  --prefix=<text>             Prepend a string to the generated ID
-  --suffix=<text>             Append a string to the generated ID
-  --template=<tpl>            Custom template with %id and %ts placeholders
+  --octets                    Number of ID segments (default: 4)
+  --octetLength               Length of each segment (default: 8)
+  --instances                 Number of IDs to generate
+  --octetSeparator            Separator character between segments (default: "-")
+  --format                    Predefined ID format that sets multiple options.
+  --octetFormat               Custom format for octet lengths, e.g. "4-6-8"
+  --includeOnly               Use only the provided characters
+  --timestamp                 Include timestamp in the ID
+  --timestampFormat           Timestamp format (e.g., yyyy-mm-dd)
+  --prefix                    Prepend a string to the generated ID
+  --suffix                    Append a string to the generated ID
+  --template                  Custom template with %id and %ts placeholders
   --verbose                   Return detailed object with generated ID and options
   --help                      Show this help message
 
@@ -84,9 +85,8 @@ args.forEach((arg) => {
         options.octetFormat = value;
         break;
 
-      case 'idFormat':
       case 'format':
-        options.idFormat = value;
+        ucidFromFormat.changeOpts(value, options);
         break;
 
       // String options
@@ -106,10 +106,12 @@ args.forEach((arg) => {
         options.verbose = true;
         break;
 
+      // help text
       case 'help':
         console.log(helpText);
         process.exit(0);
 
+      // default
       default:
         console.warn(`Unknown option: --${key}`);
         console.log(helpText);

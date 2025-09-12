@@ -1,8 +1,4 @@
-const {
-  resolveFormat,
-  secureRandChar,
-  timeStamp,
-} = require('./utils');
+const { resolveFormat, secureRandChar, timeStamp } = require('./utils.js');
 
 /**
  * Generates a customizable and optionally verbose Unique Custom ID (UCID).
@@ -12,7 +8,6 @@ const {
  * @param {number} [options.octets=4] - Number of octets in the ID (must be > 0).
  * @param {number} [options.octetLength=8] - Default length of each octet.
  * @param {string|Array<number>} [options.octetFormat=''] - Custom format for octet lengths, e.g., [4,6,8] or "4-6-8".
- * @param {string|null} [options.idFormat=''] - Predefined ID format that sets multiple options.
  * @param {boolean} [options.uppercase=false] - Whether to include uppercase A–Z characters.
  * @param {boolean} [options.lowercase=true] - Whether to include lowercase a–z characters.
  * @param {boolean} [options.numbers=true] - Whether to include digits 0–9.
@@ -41,7 +36,6 @@ function ucidGenerateId(options = {}) {
     lowercase: true,
     octetLength: 8,
     octetFormat: '',
-    idFormat: null,
     instances: 1,
     numbers: true,
     octetSeparator: '-',
@@ -63,7 +57,6 @@ function ucidGenerateId(options = {}) {
     lowercase,
     octetLength,
     octetFormat,
-    idFormat,
     instances,
     numbers,
     octetSeparator,
@@ -78,6 +71,7 @@ function ucidGenerateId(options = {}) {
     customize,
     condition,
   } = { ...defaults, ...options };
+
   if (typeof condition === 'function') {
     let allowed = false;
     let error = null;
@@ -101,79 +95,6 @@ function ucidGenerateId(options = {}) {
 
   if (octets <= 0) throw new Error('Octets must be greater than 0');
   if (octetLength <= 0) throw new Error('OctetLength must be greater than 0');
-
-  if (idFormat && typeof idFormat === 'string') {
-    switch (idFormat.toLowerCase()) {
-      case 'uuid':
-      case 'uuidv4':
-      case 'universal':
-      case 'universal-id':
-        octets = 5;
-        octetFormat = [8, 4, 4, 4, 12];
-        includeOnly = '1234567890abcdef';
-        break;
-
-      case 'sha':
-      case 'sha1':
-        octets = 5;
-        octetSeparator = '';
-        includeOnly = '1234567890abcdef';
-        break;
-
-      case 'sha256':
-        octets = 8;
-        octetSeparator = '';
-        includeOnly = '1234567890abcdef';
-        break;
-
-      case 'object':
-      case 'objectid':
-      case 'object-id':
-        octets = 3;
-        octetFormat = [8, 4, 8];
-        includeOnly = '1234567890abcdef';
-        octetSeparator = '';
-        break;
-
-      case 'ulid':
-        octets = 2;
-        octetLength = 13;
-        lowercase = false;
-        uppercase = true;
-        octetSeparator = '';
-        break;
-
-      case 'nanoid':
-      case 'nano-id':
-      case 'nano':
-        octets = 1;
-        octetLength = 21;
-        uppercase = true;
-        octetSeparator = '';
-        break;
-
-      case 'ksuid':
-        octets = 1;
-        octetLength = 27;
-        uppercase = true;
-        octetSeparator = '';
-        break;
-
-      case 'cuid':
-        octets = 3;
-        octetSeparator = '';
-        prefix = 'c';
-        break;
-
-      case 'snowflake':
-      case 'snowflake-id':
-        octets = 3;
-        octetLength = 6;
-        octetSeparator = '';
-        includeOnly = '1234567890';
-        break;
-    }
-  }
 
   const charset =
     includeOnly ||
