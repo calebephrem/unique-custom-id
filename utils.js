@@ -1,44 +1,7 @@
 const crypto = require('crypto');
 
 /**
- * Shuffles the characters in a string using the Fisher-Yates algorithm.
- *
- * @function
- * @param {string} str - The input string to shuffle.
- * @returns {string} - The shuffled string. Returns an empty string if input is invalid.
- *
- * @example
- * shuffleStr('hello'); // -> "loelh"
- */
-function shuffleStr(str) {
-  if (typeof str !== 'string') {
-    console.error(`Error: ${str} is not a string`);
-    return '';
-  }
-
-  const arr = [...str];
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-
-  return arr.join('');
-}
-
-/**
  * Returns a formatted timestamp string using a custom format.
- *
- * Supported tokens:
- * - yyyy: Full year (e.g., 2025)
- * - yy: Two-digit year (e.g., 25)
- * - mm: Month (01-12)
- * - dd: Day of the month (01-31)
- * - hh: Hours (00-23)
- * - min: Minutes (00-59)
- * - ss: Seconds (00-59)
- * - ms: Milliseconds (two-digit)
- * - unix: Unix timestamp (seconds)
- * - iso: ISO string
  *
  * @function
  * @param {string} [format='yyyymmdd'] - Format string using supported tokens.
@@ -167,7 +130,6 @@ function secureRandChar(charset) {
  * @description Utility functions used in UCID generation.
  */
 module.exports = {
-  shuffleStr,
   resolveFormat,
   secureRandChar,
   timeStamp,

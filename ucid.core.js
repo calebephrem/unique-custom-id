@@ -1,5 +1,4 @@
 const {
-  shuffleStr,
   resolveFormat,
   secureRandChar,
   timeStamp,
@@ -199,10 +198,9 @@ function ucidGenerateId(options = {}) {
   const generateId = () => {
     const ids = Array.from({ length: octets }, (_, i) => {
       const len = resolveFormat(octetFormat, i, octetLength, octetSeparator);
-      const raw = Array.from({ length: len }, () =>
+      const octet = Array.from({ length: len }, () =>
         secureRandChar(charset)
       ).join('');
-      const octet = shuffleStr(shuffleStr(raw));
       return typeof customize === 'function' ? customize(octet, i) : octet;
     });
 

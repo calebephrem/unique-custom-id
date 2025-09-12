@@ -1,7 +1,7 @@
 {
   "name": "unique-custom-id",
-  "version": "2.8.0",
-  "description": "⚡️ Generate custom IDs like never before — fast, fun, and fully yours!",
+  "version": "2.8.1",
+  "description": "⚡️ Generate custom IDs like never before — fast, secure, and fully yours! 🔥",
   "main": "index.js",
   "bin": {
     "ucid": "./cli/cli.js"
@@ -18,12 +18,16 @@
     "ucid",
     "ucid generator",
     "uuid",
+    "uuid generator",
     "unique custom id",
     "unique id",
+    "unique-id",
     "unique id generator",
     "custom id",
+    "custom-id",
     "custom id generator",
     "secure id",
+    "secure-id",
     "secure id generator",
     "id",
     "id generator",

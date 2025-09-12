@@ -16,11 +16,11 @@ Because it's...
 - 🪶 **Lightweight** — Less than 50kb!
 - 🧠 **Simple** — Just call a single function and boom 💥: instant ID!
 - 🔐 **Secure** — Fresh, unique IDs every. single. time.
-- 🌀 **CLI** — spin up IDs faster than you can blink
+- 🌀 **CLI** — spin up IDs faster than you can blink!
 
 ## 🧬 What’s Under the Hood?
 
-UCID runs independently without any [dependencies](https://www.npmjs.com/package/unique-custom-id?activeTab=dependencies) — just pure JavaScript magic ✨. It uses Fisher-Yates Shuffle, Crypto etc.
+UCID runs independently [without any dependencies](https://www.npmjs.com/package/unique-custom-id?activeTab=dependencies) — just pure JavaScript magic ✨.
 
 **If you use the default options, even if you generate 1 BILLION IDs PER SECOND, you'd need hundreds of millions of years to have a meaningful chance of a collision**. Sounds unbelievable? Let’s do the math:
 
@@ -430,15 +430,6 @@ ucid({
       : reject('UCID generation is disabled in non-production environments.'),
 });
 
-// Time-based restriction
-ucid({
-  condition: (resolve, reject) => {
-    const hour = new Date().getHours();
-    if (hour >= 9 && hour <= 17) resolve();
-    else reject('UCIDs can only be generated during business hours.');
-  },
-});
-
 // Check authentication
 ucid({
   condition: (resolve, reject) =>
@@ -455,7 +446,7 @@ If you’re thinking about improving [UCID](https://github.com/calebephrem/uniqu
 
 ## 🧸 Final Thoughts
 
-UCID is built for fun, flexibility, and speed — perfect for devs who want secure and customizable identifiers in milliseconds.
+UCID is built for security, flexibility, and speed — perfect for devs who want secure and customizable identifiers in milliseconds.
 
 ## 🌟 Give It a Try!
 

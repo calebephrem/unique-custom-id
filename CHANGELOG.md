@@ -1,5 +1,11 @@
 # Change Log
 
+## `v2.8.1`
+
+### 🛠️ Fixes
+
+- Remove FisherYates shuffle, was unnecessary starting from `v2.4.0`
+
 ## `v2.8.0`
 
 ### 🚀 Enhancements
