@@ -433,16 +433,35 @@ ucid({
 There are many predefined formats in UCID. Those predefined formats maybe existing or custom formats. Many of them have aliases.
 
 - uuid / uuidv4 / universal / universal-id
-- sha / sha1
-- sha256
-- objectid / object / object-id
-- ulid
-- nanoid / nano-id / nano
+- nano / nanoid / nano-id
 - ksuid
 - cuid
+- ulid
 - snowflake / snowflake-id
-- hex / hexadecimal
+- sha / sha1
+- sha256
+- sha512
+- md5
+- object / objectid / object-id
+- mongo / objectid24
+- objectid32
+- digits / numeric
+- alphanumeric
+- alpha
+- ts-id / timestamp-id
+- epoch-id
+- jwt-id
+- bcrypt-id
+- argon-id
+- host-id / machine-id
+- session-id
+- short
+- mini
+- ghost
+- phantom
+- ninja
 - shortuuid / short-uuid / short-uuidv4
+- hex / hexadecimal
 
 ```js
 ucid.format('uuid'); // uuidv4, universal or universal-id also works

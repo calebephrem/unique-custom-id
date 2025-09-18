@@ -4,7 +4,7 @@
 
 ### ✨ Introduced
 
-- `ucid.format` - contains predefined id formats
+- `ucid.format` - contains many predefined id formats
 
 ### 🛠️ Fixes
 

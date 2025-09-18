@@ -10,7 +10,11 @@ const crypto = require('crypto');
  * @example
  * timeStamp('yyyy-mm-dd_hh:min:ss'); // -> "2025-09-04_18:40:22"
  */
-function timeStamp(format = 'yyyymmdd') {
+function timeStamp(format) {
+  if (!format || typeof format !== 'string') {
+    format = 'yyyymmdd';
+  }
+
   const now = new Date();
   const pad = (n, len = 2) => n.toString().padStart(len, '0');
 
@@ -105,9 +109,10 @@ function resolveFormat(octetFormat, i, defaultLen, sep) {
   if (Array.isArray(octetFormat)) return Number(octetFormat[i]) || defaultLen;
 
   const formatStr = String(octetFormat);
+
   if (formatStr.includes(sep)) {
-    const joined = formatStr.split(sep).join('');
-    return Number(joined[i]) || defaultLen;
+    const parts = formatStr.split(sep);
+    return Number(parts[i]) || defaultLen;
   }
 
   return Number(formatStr[i]) || defaultLen;

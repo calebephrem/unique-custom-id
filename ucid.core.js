@@ -30,7 +30,7 @@ const { resolveFormat, secureRandChar, timeStamp } = require('./utils.js');
  * ucidGenerateId(); // -> "ac1d2f3e-d4e5f6g7-h8i9j0k1-l2m3n4o5"
  */
 function ucidGenerateId(options = {}) {
-  const defaults = {
+  const defaults = Object.freeze({
     octets: 4,
     uppercase: false,
     lowercase: true,
@@ -49,7 +49,7 @@ function ucidGenerateId(options = {}) {
     verbose: false,
     customize: null,
     condition: null,
-  };
+  });
 
   let {
     octets,
@@ -108,7 +108,9 @@ function ucidGenerateId(options = {}) {
       .join('');
 
   if (!charset) {
-    throw new Error('Character set is empty. Adjust your options.');
+    throw new Error(
+      'Character set is empty. Make sure at least one of `uppercase`, `lowercase`, `numbers`, `symbols`, or `includeOnly` is enabled.'
+    );
   }
 
   /**

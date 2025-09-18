@@ -3,7 +3,7 @@
  *
  * @param {string} format
  * @param {Object} [options]
- * @return {void} 
+ * @return {void}
  */
 function formatOpts(format, options) {
   if (!format || typeof format !== 'string' || options === undefined) {
@@ -18,6 +18,15 @@ function formatOpts(format, options) {
       options.octets = 5;
       options.octetFormat = [8, 4, 4, 4, 12];
       options.includeOnly = '1234567890abcdef';
+      break;
+
+    case 'nanoid':
+    case 'nano-id':
+    case 'nano':
+      options.octets = 1;
+      options.octetLength = 21;
+      options.uppercase = true;
+      options.octetSeparator = '';
       break;
 
     case 'ksuid':
@@ -37,15 +46,6 @@ function formatOpts(format, options) {
       options.octets = 2;
       options.octetLength = 13;
       options.lowercase = false;
-      options.uppercase = true;
-      options.octetSeparator = '';
-      break;
-
-    case 'nanoid':
-    case 'nano-id':
-    case 'nano':
-      options.octets = 1;
-      options.octetLength = 21;
       options.uppercase = true;
       options.octetSeparator = '';
       break;
@@ -71,6 +71,20 @@ function formatOpts(format, options) {
       options.includeOnly = '1234567890abcdef';
       break;
 
+    case 'sha512':
+      options.octets = 16;
+      options.octetLength = 8;
+      options.octetSeparator = '';
+      options.includeOnly = '1234567890abcdef';
+      break;
+
+    case 'md5':
+      options.octets = 1;
+      options.octetLength = 32;
+      options.octetSeparator = '';
+      options.includeOnly = '1234567890abcdef';
+      break;
+
     case 'object':
     case 'objectid':
     case 'object-id':
@@ -80,9 +94,128 @@ function formatOpts(format, options) {
       options.octetSeparator = '';
       break;
 
-    case 'hex':
-    case 'hexadecimal':
+    case 'mongo':
+    case 'objectid24':
+      options.octets = 1;
+      options.octetLength = 24;
       options.includeOnly = '1234567890abcdef';
+      options.octetSeparator = '';
+      break;
+
+    case 'objectid32':
+      options.octets = 1;
+      options.octetLength = 32;
+      options.includeOnly = '1234567890abcdef';
+      options.octetSeparator = '';
+      break;
+
+    case 'digits':
+    case 'numeric':
+      options.includeOnly = '0123456789';
+      options.octets = 1;
+      options.octetLength = 16;
+      options.octetSeparator = '';
+      break;
+
+    case 'alphanumeric':
+      options.uppercase = true;
+      options.lowercase = true;
+      options.numbers = true;
+      options.octets = 1;
+      options.octetLength = 16;
+      options.octetSeparator = '';
+      break;
+
+    case 'alpha':
+      options.uppercase = true;
+      options.lowercase = true;
+      options.numbers = false;
+      options.octets = 1;
+      options.octetLength = 16;
+      options.octetSeparator = '';
+      break;
+
+    case 'ts-id':
+    case 'timestamp-id':
+      options.octets = 2;
+      options.octetLength = 6;
+      options.timestamp = 'prefix';
+      break;
+
+    case 'epoch-id':
+      options.octets = 1;
+      options.octetLength = 8;
+      options.timestampFormat = 'unix';
+      options.timestamp = 'prefix';
+      break;
+
+    case 'jwt-id':
+      options.octets = 3;
+      options.octetLength = 16;
+      options.octetSeparator = '.';
+      options.includeOnly =
+        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_';
+      break;
+
+    case 'bcrypt-id':
+      options.octets = 1;
+      options.octetLength = 60;
+      options.includeOnly =
+        './ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      options.octetSeparator = '';
+      break;
+
+    case 'argon-id':
+      options.octets = 1;
+      options.octetLength = 64;
+      options.includeOnly =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+      options.octetSeparator = '';
+      break;
+
+    case 'host-id':
+    case 'machine-id':
+      options.octets = 4;
+      options.octetLength = 6;
+      options.includeOnly = '0123456789abcdef';
+      break;
+
+    case 'session-id':
+      options.uppercase = true;
+      options.octets = 2;
+      options.octetLength = 12;
+      options.timestamp = 'prefix';
+      break;
+
+    case 'short':
+      options.octets = 1;
+      options.octetLength = 8;
+      options.octetSeparator = '';
+      break;
+
+    case 'mini':
+      options.octets = 1;
+      options.octetLength = 6;
+      options.octetSeparator = '';
+      break;
+
+    case 'ghost':
+      options.octets = 2;
+      options.octetLength = 9;
+      options.octetSeparator = '_';
+      break;
+
+    case 'phantom':
+      options.octets = 3;
+      options.octetLength = 10;
+      options.octetSeparator = '_';
+      break;
+
+    case 'ninja':
+      options.octets = 3;
+      options.octetLength = 7;
+      options.octetSeparator = '-';
+      options.prefix = 'n';
       break;
 
     case 'shortuuid':
@@ -90,6 +223,11 @@ function formatOpts(format, options) {
     case 'short-uuidv4':
       options.octets = 4;
       options.octetFormat = [8, 4, 4, 8];
+      options.includeOnly = '1234567890abcdef';
+      break;
+
+    case 'hex':
+    case 'hexadecimal':
       options.includeOnly = '1234567890abcdef';
       break;
   }
@@ -131,7 +269,7 @@ function ucidFromFormat(format) {
 }
 
 ucidFromFormat.changeOpts = function (format, options) {
-  return formatOpts(format, options)
+  return formatOpts(format, options);
 };
 
 module.exports = ucidFromFormat;
