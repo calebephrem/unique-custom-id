@@ -1,5 +1,11 @@
 # Change Log
 
+## `v3.0.1`
+
+### 🚀 Enhancements
+
+- Add UCID Wiki links
+
 ## `v3.0.0`
 
 ### ✨ Introduced

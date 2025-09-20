@@ -36,7 +36,7 @@ npm run ucid
 | --instances       | Number of IDs to generate                                 | 1       |
 | --octetSeparator  | Separator character between segments                      | '-'     |
 | --octetFormat     | Custom format for octet lengths                           | ''      |
-| --format        | Predefined ID format that sets multiple options.          | null    |
+| --format          | Predefined ID format that sets multiple options.          | null    |
 | --includeOnly     | Use only the provided characters                          | null    |
 | --timestamp       | Include timestamp in the id, either 'prefix' or 'suffix'. | null    |
 | --timestampFormat | The format of the timestamp in the id.                    | null    |
@@ -45,3 +45,5 @@ npm run ucid
 | --template        | Custom template with %id placeholders                     | null    |
 | --verbose         | Return the whole options object including the id          | false   |
 | --help            | Show help message                                         | -       |
+
+See [UCID CLI Wiki](https://github.com/calebephrem/unique-custom-id/wiki/CLI) for more documentation.

@@ -22,45 +22,25 @@ Because it's...
 
 UCID runs independently [without any dependencies](https://www.npmjs.com/package/unique-custom-id?activeTab=dependencies) — just pure JavaScript magic ✨.
 
-**If you use the default options, even if you generate 1 BILLION IDs PER SECOND, you'd need hundreds of millions of years to have a meaningful chance of a collision**. Sounds unbelievable? Let’s do the math:
+### ✅ Interesting Fact
 
-### Collision Probability of Secure Random 32-Character ID (Base36)
+If you use the **default options**, even if you generate **1 billion IDs per second**, you'd need **hundreds of millions of years** to have a meaningful chance of a collision. Sounds unbelievable? Have a look at the [wiki page](https://github.com/calebephrem/unique-custom-id/wiki/Entropy) for the math.
 
-**ID Format**: `xxxxxxxx-xxxxxxxx-xxxxxxxx-xxxxxxxx`  
-**Character Set**: 36 characters (`0–9`, `a–z`)  
-**Length**: 32 characters  
-**Randomness Source**: Cryptographically secure (`crypto.randomBytes`)
 
-### Total Possible Unique IDs
-
-36^32 ≈ 6.334 × 10^49
-
-### Generation Rate
-
-- IDs per second: 1,000,000,000
-- Seconds per year: 60 × 60 × 24 × 365 = 31,536,000
-- IDs per year: 1 × 10^9 × 31,536,000 = 3.1536 × 10^16
-
-### Collision Threshold (Birthday Paradox)
-
-√(36^32) = 36^16 ≈ 7.961 × 10^24
-
-### Years to Reach 50% Collision Probability
-
-7.961 × 10^24 ÷ 3.1536 × 10^16 ≈ 252,443,706 years
-
-### ✅ Conclusion
-
-Using cryptographically secure randomness, your custom 32-character base36 ID format would take **~252 million years** of generating **1 BILLION IDs PER SECOND** to reach a **50% chance of collision**.
-
-This makes it **EXTREMELY SAFE** for any real-world application. Offers **greater collision resistance than UUID v4** (~82 thousand years of generating 1 BILLION IDs PER SECOND) thanks to a larger entropy space (6.334 × 10^49), powered by cryptographically secure randomness.
-
-## 🛠️ How to Use It
+## 🛠️ How to Use UCID
 
 ### 📦 Installation
 
+Install via npm:
+
 ```sh
 npm install unique-custom-id
+```
+
+Or with yarn:
+
+```sh
+yarn add unique-custom-id
 ```
 
 ### ➕ Importing
@@ -470,9 +450,6 @@ ucid.format('uuid'); // uuidv4, universal or universal-id also works
 ucid.format('sha');
 // Result: b216a7459df37c38b701ac2b5ad1ad5c634260f2
 
-ucid.format('nanoid');
-// Result: G3diDfj4Y4dZtjFxke9Js
-
 ucid.format('cuid');
 // Result: c25u32ul06423krgbcuygdpce
 ```
@@ -485,6 +462,8 @@ If you’re thinking about improving [UCID](https://github.com/calebephrem/uniqu
 ## 🧸 Final Thoughts
 
 UCID is built for security, flexibility, and speed — perfect for devs who want secure and customizable identifiers in milliseconds.
+
+View [UCID Wiki](https://github.com/calebephrem/unique-custom-id/wiki) if you want detailed documentation about UCID.
 
 ## 🌟 Give It a Try!
 
