@@ -177,12 +177,12 @@ Controls how the timestamp is formatted.
 
 You can use whatever format you like. yyyy-mm-dd, mm-dd-yy, however you like it, with additional predefined formats:
 
-- unix / epoch
-- military
-- iso
-- utc
-- rfc (rfc3339)
-- filetime / winft (Windows FILETIME)
+- `unix` / `epoch`
+- `military`
+- `iso`
+- `utc`
+- `rfc` (`rfc3339`)
+- `filetime` / `winft` (Windows FILETIME)
 
 ```js
 ucid({
@@ -412,36 +412,41 @@ ucid({
 
 There are many predefined formats in UCID. Those predefined formats maybe existing or custom formats. Many of them have aliases.
 
-- uuid / uuidv4 / universal / universal-id
-- nano / nanoid / nano-id
-- ksuid
-- cuid
-- ulid
-- snowflake / snowflake-id
-- sha / sha1
-- sha256
-- sha512
-- md5
-- object / objectid / object-id
-- mongo / objectid24
-- objectid32
-- digits / numeric
-- alphanumeric
-- alpha
-- ts-id / timestamp-id
-- epoch-id
-- jwt-id
-- bcrypt-id
-- argon-id
-- host-id / machine-id
-- session-id
-- short
-- mini
-- ghost
-- phantom
-- ninja
-- shortuuid / short-uuid / short-uuidv4
-- hex / hexadecimal
+- `uuid`, `uuidv4`, `universal`, `universal-id`
+- `nanoid`, `nano`, `nano-id`
+- `ksuid`
+- `cuid`
+- `ulid`
+- `snowflake`, `snowflake-id`
+- `sha`, `sha1`
+- `sha256`
+- `sha512`
+- `md5`
+- `object`, `objectid`, `object-id`
+- `mongo`, `objectid24`
+- `objectid32`
+- `digits`, `numeric`
+- `alphanumeric`
+- `alpha`
+- `ts-id`, `timestamp-id`
+- `epoch-id`
+- `jwt-id`
+- `bcrypt-id`
+- `argon-id`
+- `host-id`, `machine-id`
+- `session-id`
+- `short`, `mini`, `ghost`, `phantom`, `ninja`
+- `shortuuid`, `short-uuid`, `short-uuidv4`
+- `hex`, `hexadecimal`
+- `shortucid`, `short-ucid`
+- `snake-case`
+- `separatorless`, `sepless`, `separator-less`
+- `zulu`
+- `slug`
+- `dna`
+- `leet`
+- `caps`, `capsid`, `caps-id`
+- `wordy`
 
 ```js
 ucid.format('uuid'); // uuidv4, universal or universal-id also works

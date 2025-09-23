@@ -230,6 +230,68 @@ function formatOpts(format, options) {
     case 'hexadecimal':
       options.includeOnly = '1234567890abcdef';
       break;
+
+    case 'short-ucid':
+    case 'shortucid':
+      options.octets = 3;
+      break;
+
+    case 'snake':
+    case 'snake-case':
+      options.octets = 3;
+      options.includeOnly = '1234567890abcdef';
+      options.octetSeparator = '_';
+      break;
+
+    case 'separatorless':
+    case 'separator-less':
+    case 'sepless':
+      options.octets = 1;
+      options.octetLength = 32;
+      break;
+
+    case 'zulu':
+      options.octets = 2;
+      options.octetLength = 10;
+      options.timestamp = 'prefix';
+      options.timestampFormat = 'military';
+      break;
+
+    case 'slug':
+      options.octets = 2;
+      options.octetLength = 6;
+      options.octetSeparator = '-';
+      break;
+
+    case 'dna':
+      options.octets = 1;
+      options.octetLength = 32;
+      options.uppercase = true;
+      options.lowercase = false;
+      break;
+
+    case 'leet':
+      options.octets = 1;
+      options.octetLength = 24;
+      options.includeOnly = 'aeiou1234567890';
+      break;
+
+    case 'caps':
+    case 'capsid':
+    case 'caps-id':
+      options.uppercase = true;
+      options.lowercase = false;
+      options.octets = 4;
+      options.octetLength = 6;
+      break;
+
+    case 'wordy':
+      options.octets = 3;
+      options.octetLength = 7;
+      options.lowercase = true;
+      options.numbers = false;
+      options.octetSeparator = '-';
+      break;
   }
 }
 

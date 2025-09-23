@@ -1,5 +1,11 @@
 # Change Log
 
+## `v3.1.0`
+
+### 🚀 Enhancements
+
+- Add more formats to `ucid.format`
+
 ## `v3.0.1`
 
 ### 🚀 Enhancements
