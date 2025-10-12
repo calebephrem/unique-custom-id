@@ -16,9 +16,6 @@ const ucidFromFormat = require('../ucid.format.js');
 const args = process.argv.slice(2);
 const options = {};
 
-/**
- * Help text shown on --help flag.
- */
 const helpText = `
 Usage: npx unique-custom-id [options]
 
@@ -32,7 +29,7 @@ Options:
   --octetLength               Length of each segment (default: 8)
   --instances                 Number of IDs to generate
   --octetSeparator            Separator character between segments (default: "-")
-  --format                    Predefined ID format that sets multiple options.
+  --format                    Predefined ID format that sets multiple options
   --octetFormat               Custom format for octet lengths, e.g. "4-6-8"
   --includeOnly               Use only the provided characters
   --timestamp                 Include timestamp in the ID
@@ -48,81 +45,52 @@ Examples:
   npx unique-custom-id --template="user-%id-%ts" --timestampFormat=yyyy-mm-dd
 `;
 
-args.forEach((arg) => {
-  if (arg.startsWith('--')) {
-    const [rawKey, rawVal] = arg.slice(2).split('=');
-    const key = rawKey.trim();
-    const value = rawVal?.trim();
+const setOption = (key, value) => {
+  const boolFlags = ['uppercase', 'lowercase', 'numbers', 'symbols'];
+  const numFlags = ['octets', 'octetLength', 'instances'];
+  const strFlags = [
+    'octetSeparator',
+    'octetFormat',
+    'includeOnly',
+    'timestamp',
+    'timestampFormat',
+    'prefix',
+    'suffix',
+    'template',
+  ];
 
-    switch (key) {
-      // Boolean flags (true if present without value)
-      case 'uppercase':
-      case 'lowercase':
-      case 'numbers':
-      case 'symbols':
-        options[key] = value === undefined ? true : value === 'true';
-        break;
-
-      case 'no-numbers':
-        options.numbers = false;
-        break;
-
-      // Number options
-      case 'octets':
-      case 'octetLength':
-      case 'instances':
-        options[key] = Number(value);
-        break;
-
-      // Renamed or aliased options
-      case 'octetSeparator':
-      case 'separator':
-      case 'sep':
-        options.octetSeparator = value;
-        break;
-
-      case 'octetFormat':
-        options.octetFormat = value;
-        break;
-
-      case 'format':
-        ucidFromFormat.changeOpts(value, options);
-        break;
-
-      // String options
-      case 'octetSeparator':
-      case 'octetFormat':
-      case 'includeOnly':
-      case 'timestamp':
-      case 'timestampFormat':
-      case 'prefix':
-      case 'suffix':
-      case 'template':
-        options[key] = value;
-        break;
-
-      // Boolean flag (does not accept value)
-      case 'verbose':
-        options.verbose = true;
-        break;
-
-      // help text
-      case 'help':
-        console.log(helpText);
-        process.exit(0);
-
-      // default
-      default:
-        console.warn(`Unknown option: --${key}`);
-        console.log(helpText);
-        process.exit(1);
-    }
+  if (boolFlags.includes(key)) {
+    options[key] = value === undefined ? true : value === 'true';
+  } else if (key === 'no-numbers') {
+    options.numbers = false;
+  } else if (numFlags.includes(key)) {
+    options[key] = Number(value);
+  } else if (['separator', 'sep'].includes(key)) {
+    options.octetSeparator = value;
+  } else if (key === 'format') {
+    ucidFromFormat.changeOpts(value, options);
+  } else if (strFlags.includes(key)) {
+    options[key] = value;
+  } else if (key === 'verbose') {
+    options.verbose = true;
+  } else if (key === 'help') {
+    console.log(helpText);
+    process.exit(0);
+  } else {
+    console.warn(`Unknown option: --${key}`);
+    console.log(helpText);
+    process.exit(1);
   }
-});
+};
+
+for (const arg of args) {
+  if (!arg.startsWith('--')) continue;
+  const [rawKey, rawVal] = arg.slice(2).split('=');
+  setOption(rawKey.trim(), rawVal?.trim());
+}
 
 try {
-  const result = ucidGenerateId(options);
-  console.log(result);
+  console.log(ucidGenerateId(options));
 } catch (err) {
   console.error('Error:', err.message);
   process.exit(1);
