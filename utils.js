@@ -2,140 +2,66 @@ const crypto = require('crypto');
 
 /**
  * Returns a formatted timestamp string using a custom format.
- *
- * @function
- * @param {string} [format='yyyymmdd'] - Format string using supported tokens.
- * @returns {string} - Formatted timestamp string.
- *
- * @example
- * timeStamp('yyyy-mm-dd_hh:min:ss'); // -> "2025-09-04_18:40:22"
+ * @param {string} [format='yyyymmdd']
+ * @returns {string}
  */
-function timeStamp(format) {
-  if (!format || typeof format !== 'string') {
-    format = 'yyyymmdd';
-  }
-
+function timeStamp(format = 'yyyymmdd') {
   const now = new Date();
-  const pad = (n, len = 2) => n.toString().padStart(len, '0');
+  const pad = (n, len = 2) => String(n).padStart(len, '0');
+  const tzOffset = () => {
+    const off = -now.getTimezoneOffset();
+    const sign = off >= 0 ? '+' : '-';
+    const hh = pad(Math.floor(Math.abs(off) / 60));
+    const mm = pad(Math.abs(off) % 60);
+    return `${sign}${hh}:${mm}`;
+  };
 
   const replacements = {
     yyyy: now.getFullYear(),
-    yy: now.getFullYear().toString().slice(-2),
+    yy: String(now.getFullYear()).slice(-2),
     mm: pad(now.getMonth() + 1),
     dd: pad(now.getDate()),
     hh: pad(now.getHours()),
     min: pad(now.getMinutes()),
     ss: pad(now.getSeconds()),
     ms: pad(Math.floor(now.getMilliseconds() / 10)),
-    epoch: Math.floor(now.getTime() / 1000),
     unix: Math.floor(now.getTime() / 1000),
-    military: `${now.getHours().toString().padStart(2, '0')}${now
-      .getMinutes()
-      .toString()
-      .padStart(2, '0')}${now.getSeconds().toString().padStart(2, '0')}`,
+    epoch: Math.floor(now.getTime() / 1000),
+    military: `${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`,
     iso: now.toISOString(),
-    utc: `${now.getUTCFullYear()}-${(now.getUTCMonth() + 1)
-      .toString()
-      .padStart(2, '0')}-${now.getUTCDate().toString().padStart(2, '0')}T${now
-      .getUTCHours()
-      .toString()
-      .padStart(2, '0')}:${now
-      .getUTCMinutes()
-      .toString()
-      .padStart(2, '0')}:${now.getUTCSeconds().toString().padStart(2, '0')}Z`,
-
-    rfc: `${now.getFullYear()}-${(now.getMonth() + 1)
-      .toString()
-      .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}T${now
-      .getHours()
-      .toString()
-      .padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now
-      .getSeconds()
-      .toString()
-      .padStart(2, '0')}${(() => {
-      const offset = -now.getTimezoneOffset();
-      const sign = offset >= 0 ? '+' : '-';
-      const hh = Math.floor(Math.abs(offset) / 60)
-        .toString()
-        .padStart(2, '0');
-      const mm = (Math.abs(offset) % 60).toString().padStart(2, '0');
-      return `${sign}${hh}:${mm}`;
-    })()}`,
-    rfc3339: `${now.getFullYear()}-${(now.getMonth() + 1)
-      .toString()
-      .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}T${now
-      .getHours()
-      .toString()
-      .padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now
-      .getSeconds()
-      .toString()
-      .padStart(2, '0')}${(() => {
-      const offset = -now.getTimezoneOffset();
-      const sign = offset >= 0 ? '+' : '-';
-      const hh = Math.floor(Math.abs(offset) / 60)
-        .toString()
-        .padStart(2, '0');
-      const mm = (Math.abs(offset) % 60).toString().padStart(2, '0');
-      return `${sign}${hh}:${mm}`;
-    })()}`,
+    utc: now.toISOString().replace(/\.\d+Z$/, 'Z'),
+    rfc: `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}${tzOffset()}`,
+    rfc3339: `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}${tzOffset()}`,
     filetime: now.getTime() * 10000 + 116444736000000000,
     winft: now.getTime() * 10000 + 116444736000000000,
   };
 
   return format.replace(
-    /yyyy|yy|mm|dd|hh|min|ss|ms|unix|epoch|military|iso|utc|rfc|filetime|winft/g,
-    (token) => replacements[token] ?? token
+    /yyyy|yy|mm|dd|hh|min|ss|ms|unix|epoch|military|iso|utc|rfc|rfc3339|filetime|winft/g,
+    t => replacements[t] ?? t
   );
 }
 
 /**
- * Resolves the length of an octet at a specific index based on the format input.
- *
- * Accepts array format: [4, 6, 8]
- * Or string format with separator: "4-6-8"
- *
- * @function
- * @param {string|Array<number>} octetFormat - Format definition.
- * @param {number} i - Index of the current octet.
- * @param {number} defaultLen - Fallback length if not specified.
- * @param {string} sep - Separator (e.g., "-") for string format.
- * @returns {number} - The resolved length.
- *
- * @example
- * resolveFormat([4, 6, 8], 1, 8, '-') // -> 6
- * resolveFormat("4-6-8", 2, 8, '-')  // -> 8
+ * Resolves the length of an octet at a specific index based on the format.
+ * @param {string|Array<number>} octetFormat
+ * @param {number} i
+ * @param {number} defaultLen
+ * @param {string} sep
+ * @returns {number}
  */
 function resolveFormat(octetFormat, i, defaultLen, sep) {
-  if (Array.isArray(octetFormat)) return Number(octetFormat[i]) || defaultLen;
-
-  const formatStr = String(octetFormat);
-
-  if (formatStr.includes(sep)) {
-    const parts = formatStr.split(sep);
-    return Number(parts[i]) || defaultLen;
-  }
-
-  return Number(formatStr[i]) || defaultLen;
+  if (Array.isArray(octetFormat)) return +octetFormat[i] || defaultLen;
+  const str = String(octetFormat);
+  if (str.includes(sep)) return +str.split(sep)[i] || defaultLen;
+  return +str[i] || defaultLen;
 }
 
 /**
- * Securely picks a random character from a given charset using crypto.
- *
- * @function
- * @param {string} charset - A string of allowed characters.
- * @returns {string} - A single character from the charset.
+ * Securely picks a random character from a given charset.
+ * @param {string} charset
+ * @returns {string}
  */
-function secureRandChar(charset) {
-  const byte = crypto.randomBytes(1)[0];
-  return charset[byte % charset.length];
-}
+const secureRandChar = charset => charset[crypto.randomBytes(1)[0] % charset.length];
 
-/**
- * @module utils
- * @description Utility functions used in UCID generation.
- */
-module.exports = {
-  resolveFormat,
-  secureRandChar,
-  timeStamp,
-};
+module.exports = { timeStamp, resolveFormat, secureRandChar };
