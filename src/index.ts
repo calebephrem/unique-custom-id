@@ -1,5 +1,5 @@
-const ucidGenerateId = require('./ucid.core.js');
-const ucidFromFormat = require('./ucid.format.js');
+import ucidGenerateId from './core/index.js';
+import ucidFromFormat from './format/index.js';
 
 /**
  * Generates a customizable and optionally verbose Unique Custom ID (UCID).
@@ -42,8 +42,8 @@ function ucid(options = {}) {
  * @example
  * ucid.format('uuid') // -> 74b0e07f-66e2-bae9-8198-b7d26867e912
  */
-ucid.format = function (format) {
+ucid.format = function (format: string) {
   return ucidFromFormat(format);
 };
 
-module.exports = ucid;
+export default ucid;

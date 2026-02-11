@@ -1,38 +1,58 @@
 {
-  "name": "unique-custom-id",
-  "version": "3.1.0",
-  "description": "⚡️ Generate custom IDs like never before — fast, secure, and fully yours! 🔥",
-  "main": "index.js",
-  "bin": {
-    "ucid": "./cli/cli.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/calebephrem/unique-custom-id"
-  },
-  "bugs": {
-    "url": "https://github.com/calebephrem/unique-custom-id/issues",
-    "email": "quantumpandaprog@gmail.com"
-  },
-  "keywords": [
-    "ucid",
-    "ucid generator",
-    "uuid",
-    "uuid generator",
-    "unique custom id",
-    "unique id",
-    "unique-id",
-    "unique id generator",
-    "custom id",
-    "custom-id",
-    "custom id generator",
-    "secure id",
-    "secure-id",
-    "secure id generator",
-    "id",
-    "id generator",
-    "generator id"
-  ],
-  "author": "Caleb Ephrem",
-  "license": "MIT"
+	"name": "unique-custom-id",
+	"version": "3.1.0",
+	"description": "⚡️ Generate custom IDs like never before — fast, secure, and fully yours! 🔥",
+	"type": "module",
+	"bin": {
+		"ucid": "./cli/cli.js"
+	},
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			},
+			"require": {
+				"types": "./dist/index.d.cts",
+				"default": "./dist/index.cjs"
+			}
+		}
+	},
+	"scripts": {
+		"format": "prettier --write .",
+		"build": "tsup"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/calebephrem/unique-custom-id"
+	},
+	"bugs": {
+		"url": "https://github.com/calebephrem/unique-custom-id/issues"
+	},
+	"keywords": [
+		"ucid",
+		"ucid generator",
+		"uuid",
+		"uuid generator",
+		"unique custom id",
+		"unique id",
+		"unique-id",
+		"unique id generator",
+		"custom id",
+		"custom-id",
+		"custom id generator",
+		"secure id",
+		"secure-id",
+		"secure id generator",
+		"id",
+		"id generator",
+		"generator id"
+	],
+	"author": "Caleb Ephrem",
+	"license": "MIT",
+	"devDependencies": {
+		"prettier": "^3.8.1",
+		"tsup": "^8.5.1",
+		"typescript": "^5.9.3"
+	}
 }
