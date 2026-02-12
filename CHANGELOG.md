@@ -1,5 +1,11 @@
 # Change Log
 
+## `v3.2.1`
+
+### 🛠️ Fixes
+
+- Correct bin entry to compiled dist output
+
 ## `v3.2.0`
 
 ### 🚀 Enhancements
