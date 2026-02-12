@@ -4,7 +4,7 @@
 	"description": "⚡️ Generate custom IDs like never before — fast, secure, and fully yours! 🔥",
 	"type": "module",
 	"bin": {
-		"ucid": "./cli/index.js"
+		"ucid": "./dist/cli/index.js"
 	},
 	"exports": {
 		".": {
@@ -20,7 +20,8 @@
 	},
 	"scripts": {
 		"format": "prettier --write .",
-		"build": "tsup"
+		"build": "tsup",
+		"test": "node ./test/index.ts"
 	},
 	"repository": {
 		"type": "git",

@@ -6,3 +6,4 @@ tsup.config.ts
 node_modules/
 .git/
 .gitignore
+.prettierrc
