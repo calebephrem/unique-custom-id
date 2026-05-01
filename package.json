@@ -1,7 +1,7 @@
 {
 	"name": "unique-custom-id",
 	"version": "3.2.1",
-	"description": "⚡️ Generate custom IDs like never before — fast, secure, and fully yours! 🔥",
+	"description": "⚡️ Generate custom IDs like never before, fast, secure, and fully yours! 🔥",
 	"type": "module",
 	"bin": {
 		"ucid": "./dist/cli/index.js"

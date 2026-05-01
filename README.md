@@ -12,20 +12,19 @@
 
 Because it's...
 
-- 💿 **Compact** — [Zero dependencies](https://www.npmjs.com/package/unique-custom-id?activeTab=dependencies)!
-- 🪶 **Lightweight** — Less than 50kb!
-- 🧠 **Simple** — Just call a single function and boom 💥: instant ID!
-- 🔐 **Secure** — Fresh, unique IDs every. single. time.
-- 🌀 **CLI** — spin up IDs faster than you can blink!
+- 💿 **Compact**: [Zero dependencies](https://www.npmjs.com/package/unique-custom-id?activeTab=dependencies)!
+- 🪶 **Lightweight**: Less than 50kb!
+- 🧠 **Simple**: Just call a single function and boom 💥: instant ID!
+- 🔐 **Secure**: Fresh, unique IDs every. single. time.
+- 🌀 **CLI**: spin up IDs faster than you can blink!
 
 ## 🧬 What’s Under the Hood?
 
-UCID runs independently [without any dependencies](https://www.npmjs.com/package/unique-custom-id?activeTab=dependencies) — just pure JavaScript magic ✨.
+UCID runs independently [without any dependencies](https://www.npmjs.com/package/unique-custom-id?activeTab=dependencies), just pure JavaScript magic ✨.
 
 ### ✅ Interesting Fact
 
 If you use the **default options**, even if you generate **1 billion IDs per second**, you'd need **hundreds of millions of years** to have a meaningful chance of a collision. Sounds unbelievable? Have a look at the [wiki page](https://github.com/calebephrem/unique-custom-id/wiki/Entropy) for the math.
-
 
 ## 🛠️ How to Use UCID
 
@@ -48,13 +47,13 @@ yarn add unique-custom-id
 ES Modules:
 
 ```js
-import ucid from 'unique-custom-id';
+import ucid from "unique-custom-id";
 ```
 
 CommonJS:
 
 ```js
-const ucid = require('unique-custom-id');
+const ucid = require("unique-custom-id");
 ```
 
 ### 🚀 Generate a Simple ID
@@ -68,7 +67,7 @@ console.log(id);
 
 ## 🧩 Configuration Options
 
-UCID isn’t just easy — it’s _flexible_ too! Customize your ID like a pro 🛠️
+UCID isn’t just easy, it’s _flexible_ too! Customize your ID like a pro 🛠️
 
 ### `uppercase` and `lowercase` (booleans)
 
@@ -79,13 +78,13 @@ Control letter casing:
 
 ```js
 ucid({
-  uppercase: true,
+	uppercase: true,
 });
 // Result: TevajtrU-Eei8SnWa-0EZqr6NE-jMAHX0D6
 
 ucid({
-  uppercase: true,
-  lowercase: false,
+	uppercase: true,
+	lowercase: false,
 });
 // Result: FFJL9DAO-V3YPLZ2V-252L7URX-XCS3GWP5
 ```
@@ -99,12 +98,12 @@ Toggle digits or symbols:
 
 ```js
 ucid({
-  symbols: true,
+	symbols: true,
 });
 // Result: 5w55an#e-kw7bw7f3-7iomwp#o-dd79$yf1
 
 ucid({
-  numbers: false,
+	numbers: false,
 });
 // Result: jueldfjw-ljhiphtl-ajuptedx-rramdwne
 ```
@@ -115,12 +114,12 @@ Set how many segments (octets) the ID should have. Default: `4`.
 
 ```js
 ucid({
-  octets: 3,
+	octets: 3,
 });
 // Result: 4nlwrx87-fi65iq27-43wh2s05
 
 ucid({
-  octets: 6,
+	octets: 6,
 });
 // Result: hr5bg68k-ycxqfb1o-pkofgsm2-j6hnimgy-ehcxulnl-ptmvuf3j
 ```
@@ -131,12 +130,12 @@ Define how long each octet should be. Default: `8`.
 
 ```js
 ucid({
-  octetLength: 4,
+	octetLength: 4,
 });
 // Result: k6ue-bvfq-fc99-oe07
 
 ucid({
-  octetLength: 12,
+	octetLength: 12,
 });
 // Result: nz4kkg3jxxot-9v9bmx6y8ngt-x4ciymz48z9d-mqopg9mad4v2
 ```
@@ -147,7 +146,7 @@ Use a custom character set to generate your ID:
 
 ```js
 ucid({
-  includeOnly: '1234567890abcdef',
+	includeOnly: "1234567890abcdef",
 });
 // Result: f800cdb7-0082b1b8-f0736eb3-4b16949a
 ```
@@ -161,12 +160,12 @@ Add timestamp to your ID. Either `prefix` or `suffix`.
 
 ```js
 ucid({
-  timestamp: 'prefix', // `p`, `pre` or `pref` works too
+	timestamp: "prefix", // `p`, `pre` or `pref` works too
 });
 // Result: 20250904-k0ebaf6m-j31g7koc-b25p0p2n-u9iah5i4
 
 ucid({
-  timestamp: 'suff',
+	timestamp: "suff",
 });
 // Result: 05mdc0cp-6k6xvl9c-mgc7s9e3-t98ckh3f-20250904
 ```
@@ -186,16 +185,16 @@ You can use whatever format you like. yyyy-mm-dd, mm-dd-yy, however you like it,
 
 ```js
 ucid({
-  octets: 3,
-  timestamp: 's',
-  timestampFormat: 'dd-mm-yyyy-hh:mm:ss:ms',
+	octets: 3,
+	timestamp: "s",
+	timestampFormat: "dd-mm-yyyy-hh:mm:ss:ms",
 });
 // Result: gtrf9t1h-u00ycxuw-mxzhjuty-04-09-2025-12:09:00:39
 
 ucid({
-  octets: 3,
-  timestamp: 'p',
-  timestampFormat: 'unix',
+	octets: 3,
+	timestamp: "p",
+	timestampFormat: "unix",
 });
 // Result: 1756976740-61p0xk4r-1ad6fg3l-gxwsgpgk
 ```
@@ -205,10 +204,10 @@ ucid({
 Customize the character(s) used to separate octets. Default: `"-"`
 
 ```js
-ucid({ octetSeparator: '=' });
+ucid({ octetSeparator: "=" });
 // Result: pro9mns=odvhrd3i=28e2mqzg=t3n530m9
 
-ucid({ octetSeparator: '~' });
+ucid({ octetSeparator: "~" });
 // Result: qm09extn~dy7s1bd1~t6fl9q2g~mv352ie4
 ```
 
@@ -218,20 +217,20 @@ Set the **exact** length of each octet individually.
 
 ```js
 ucid({
-  octets: 3,
-  octetFormat: '352',
+	octets: 3,
+	octetFormat: "352",
 });
 // Result: h0c-hgkf0-k9
 
 ucid({
-  octets: 4,
-  octetFormat: [2, 4, 6, 8],
+	octets: 4,
+	octetFormat: [2, 4, 6, 8],
 });
 // Result: cb-udw8-e6m4wt-i9kim7xb
 
 ucid({
-  octets: 2,
-  octetFormat: 49,
+	octets: 2,
+	octetFormat: 49,
 });
 // Result: pr3e-piis0fdy9
 ```
@@ -242,7 +241,7 @@ Number of IDs to generate.
 
 ```js
 ucid({
-  instances: 3,
+	instances: 3,
 });
 /*
 Result: [
@@ -253,9 +252,9 @@ Result: [
 */
 
 ucid({
-  octets: 4,
-  octetFormat: [2, 4, 6, 8],
-  instances: 5,
+	octets: 4,
+	octetFormat: [2, 4, 6, 8],
+	instances: 5,
 });
 /*
 Result: [
@@ -275,18 +274,18 @@ Result: [
 
 ```js
 ucid({
-  octets: 1,
-  octetLength: 8,
-  includeOnly: '1234567890abcdef',
-  template: 'user-%id-session-%id',
+	octets: 1,
+	octetLength: 8,
+	includeOnly: "1234567890abcdef",
+	template: "user-%id-session-%id",
 });
 // Result: user-1a97ada5-session-ec64776c
 
 ucid({
-  octets: 1,
-  octetLength: 8,
-  includeOnly: '1234567890abcdef',
-  template: 'user-%id-at-%ts',
+	octets: 1,
+	octetLength: 8,
+	includeOnly: "1234567890abcdef",
+	template: "user-%id-at-%ts",
 });
 // Result: user-26001cde-at-20250903
 ```
@@ -297,8 +296,8 @@ Add static strings before or after your ID.
 
 ```js
 ucid({
-  prefix: 'ID-',
-  suffix: '-done',
+	prefix: "ID-",
+	suffix: "-done",
 });
 // Result: ID-k0ebaf6m-j31g7koc-b25p0p2n-u9iah5i4-done
 ```
@@ -313,10 +312,10 @@ This is especially useful for logging, debugging, testing, or introspection. Def
 
 ```js
 ucid({
-  octets: 3,
-  octetLength: 12,
-  includeOnly: '1234567890abcdef',
-  verbose: true,
+	octets: 3,
+	octetLength: 12,
+	includeOnly: "1234567890abcdef",
+	verbose: true,
 });
 
 /*
@@ -345,46 +344,43 @@ Function to customize each octet further than other options.
 
 ```js
 ucid({
-  octets: 2,
-  octetLength: 8,
-  includeOnly: '1234567890abcdef',
-  customize: (octet, i) => (i % 2 ? octet.toUpperCase() : octet.toLowerCase()),
+	octets: 2,
+	octetLength: 8,
+	includeOnly: "1234567890abcdef",
+	customize: (octet, i) => (i % 2 ? octet.toUpperCase() : octet.toLowerCase()),
 });
 // Result: 80a1a368-A738C260-32eaf5e3-3AF2803F
 
 ucid({
-  octets: 3,
-  octetLength: 6,
-  includeOnly: '1234567890abcdef',
-  customize: (octet, i) =>
-    i == 0 ? `user-${octet}` : i == 1 ? `session-${octet}` : `${i}${octet}`,
+	octets: 3,
+	octetLength: 6,
+	includeOnly: "1234567890abcdef",
+	customize: (octet, i) => (i == 0 ? `user-${octet}` : i == 1 ? `session-${octet}` : `${i}${octet}`),
 });
 // Result: user-81cd0a-session-13634d-212fb85
 ```
 
 ### `condition` (null | ((resolve: Function, reject: Function) => void))
 
-Optional function that acts as a gate before UCID generation begins.  
+Optional function that acts as a gate before UCID generation begins.
 It must call `resolve()` to allow generation or `reject(msg)` to skip it.
 
-If `reject()` is called, UCID generation is aborted, and the ucid function returns `undefined`.  
+If `reject()` is called, UCID generation is aborted, and the ucid function returns `undefined`.
 If `reject()` is passed an `Error` object, it will be thrown. Otherwise, the error message is logged.
 
 ```js
 // Allow generation only in production
 ucid({
-  condition: (resolve, reject) =>
-    process.env.NODE_ENV === 'production'
-      ? resolve()
-      : reject('UCID generation is disabled in non-production environments.'),
+	condition: (resolve, reject) =>
+		process.env.NODE_ENV === "production"
+			? resolve()
+			: reject("UCID generation is disabled in non-production environments."),
 });
 
 // Check authentication
 ucid({
-  condition: (resolve, reject) =>
-    auth?.currentUser?.email
-      ? resolve()
-      : reject(new Error('User must be authenticated.')),
+	condition: (resolve, reject) =>
+		auth?.currentUser?.email ? resolve() : reject(new Error("User must be authenticated.")),
 });
 ```
 
@@ -395,7 +391,7 @@ You don't have to memorize and write all those [configuration options](#-configu
 It uses the default configuration options in the back. For example:
 
 ```js
-ucid.format('uuid');
+ucid.format("uuid");
 // Result: afe5791b-788a-0c72-dc61-34b008e3fd98
 ```
 
@@ -403,9 +399,9 @@ On the back:
 
 ```js
 ucid({
-  octets: 5,
-  octetFormat: [8, 4, 4, 4, 12],
-  includeOnly: '1234567890abcdef',
+	octets: 5,
+	octetFormat: [8, 4, 4, 4, 12],
+	includeOnly: "1234567890abcdef",
 });
 // Result: afe5791b-788a-0c72-dc61-34b008e3fd98
 ```
@@ -449,24 +445,24 @@ There are many predefined formats in UCID. Those predefined formats maybe existi
 - `wordy`
 
 ```js
-ucid.format('uuid'); // uuidv4, universal or universal-id also works
+ucid.format("uuid"); // uuidv4, universal or universal-id also works
 // Result: 368463db-db52-768a-499b-88e1b6698036
 
-ucid.format('sha');
+ucid.format("sha");
 // Result: b216a7459df37c38b701ac2b5ad1ad5c634260f2
 
-ucid.format('cuid');
+ucid.format("cuid");
 // Result: c25u32ul06423krgbcuygdpce
 ```
 
 ## 🤝 Want to Contribute?
 
-We love contributions! 💙  
+We love contributions! 💙
 If you’re thinking about improving [UCID](https://github.com/calebephrem/unique-custom-id), fixing a [bug](https://github.com/calebephrem/unique-custom-id/issues), or just having fun, make sure to read the [contributing guide](./CONTRIBUTING.md) before you start. It’s got everything you need to know to get up and running! 🚀
 
 ## 🧸 Final Thoughts
 
-UCID is built for security, flexibility, and speed — perfect for devs who want secure and customizable identifiers in milliseconds.
+UCID is built for security, flexibility, and speed, perfect for devs who want secure and customizable identifiers in milliseconds.
 
 View [UCID Wiki](https://github.com/calebephrem/unique-custom-id/wiki) if you want detailed documentation about UCID.
 
