@@ -6,7 +6,7 @@ import { resolveFormat, secureRandChar, timeStamp } from "../utils/index.js";
  * @param {Object} [options={}] Configuration options
  * @returns {string|Object|Array<string|Object>}
  */
-export default function ucidGenerateId(options = {}) {
+export function ucidGenerateId(options = {}) {
 	const defaults: CoreOptions = {
 		octets: 4,
 		octetLength: 8,
@@ -113,3 +113,5 @@ export default function ucidGenerateId(options = {}) {
 
 	return instances > 1 ? Array.from({ length: instances }, generateId) : generateId();
 }
+
+export default ucidGenerateId;

@@ -1,4 +1,4 @@
-const map = {
+export const map = {
 	uuid: {
 		octets: 5,
 		octetFormat: [8, 4, 4, 4, 12],
@@ -176,5 +176,4 @@ const map = {
 	},
 };
 
-
-export default map
+export default map;

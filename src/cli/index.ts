@@ -11,7 +11,7 @@
  */
 
 import ucidGenerateId from "../core/index.js";
-import ucidFromFormat from "../format/index.js";
+import { formatOpts } from "../format/index.js";
 import type { CoreOptions } from "../types/core.js";
 
 const args = process.argv.slice(2);
@@ -69,7 +69,7 @@ const setOption = (key: string, value: string) => {
 	} else if (["separator", "sep"].includes(key)) {
 		options.octetSeparator = value;
 	} else if (key === "format") {
-		ucidFromFormat.changeOpts(value, options as unknown as CoreOptions);
+		formatOpts(value, options as unknown as CoreOptions);
 	} else if (strFlags.includes(key)) {
 		(options as any)[key] = value;
 	} else if (key === "verbose") {
@@ -91,7 +91,7 @@ for (const arg of args) {
 		console.warn(`Invalid argument: ${arg}`);
 		continue;
 	}
-	setOption(rawKey.trim(), (rawVal?.trim() ?? ""));
+	setOption(rawKey.trim(), rawVal?.trim() ?? "");
 }
 
 try {

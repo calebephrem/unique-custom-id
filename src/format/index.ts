@@ -1,12 +1,15 @@
 import ucidGenerateId from "../core/index.js";
 import type { CoreOptions } from "../types/core.js";
 import map from "./map.js";
+
+export { map };
+
 /**
  * Adjusts multiple options based on a given format string.
  * @param {string} format
  * @param {Object} [options]
  */
-function formatOpts(format: string, options?: CoreOptions) {
+export function formatOpts(format: string, options?: CoreOptions) {
 	if (!format || typeof format !== "string" || !options) return ucidGenerateId();
 
 	const f = format.toLowerCase();
@@ -26,32 +29,30 @@ function formatOpts(format: string, options?: CoreOptions) {
  * @param {string} format
  * @returns {string}
  */
-function ucidFromFormat(format: string) {
-  const defaults = {
-    octets: 4,
-    octetLength: 8,
-    octetFormat: '',
-    uppercase: false,
-    lowercase: true,
-    numbers: true,
-    symbols: false,
-    includeOnly: null,
-    octetSeparator: '-',
-    timestamp: null,
-    timestampFormat: null,
-    template: null,
-    prefix: '',
-    suffix: '',
-    instances: 1,
-    verbose: false,
-    customize: null,
-    condition: null,
-  };
+export function ucidFromFormat(format: string) {
+	const defaults = {
+		octets: 4,
+		octetLength: 8,
+		octetFormat: "",
+		uppercase: false,
+		lowercase: true,
+		numbers: true,
+		symbols: false,
+		includeOnly: null,
+		octetSeparator: "-",
+		timestamp: null,
+		timestampFormat: null,
+		template: null,
+		prefix: "",
+		suffix: "",
+		instances: 1,
+		verbose: false,
+		customize: null,
+		condition: null,
+	};
 
-  formatOpts(format, defaults);
-  return ucidGenerateId(defaults);
+	formatOpts(format, defaults);
+	return ucidGenerateId(defaults);
 }
-
-ucidFromFormat.changeOpts = formatOpts;
 
 export default ucidFromFormat;
