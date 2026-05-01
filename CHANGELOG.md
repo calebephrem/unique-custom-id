@@ -1,5 +1,11 @@
 # Change Log
 
+## `v3.3.0`
+
+### 🚀 Enhancements
+
+- Add `unique-custom-id/core` and `unique-custom-id/format` sub-path exports
+
 ## `v3.2.1`
 
 ### 🛠️ Fixes
