@@ -63,3 +63,6 @@ export default function ucid(opts?: Partial<Opts> | Map): string {
 
   return id;
 }
+
+export { characterSet, map };
+export type { Map, Opts };
