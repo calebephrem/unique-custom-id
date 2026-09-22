@@ -1,6 +1,6 @@
 {
-  "name": "unique-custom-id",
-  "version": "3.3.0",
+  "name": "ucid-js",
+  "version": "1.0.0",
   "description": "Generate an ID that is as structured as you want it to be.",
   "type": "module",
   "author": "Caleb Ephrem",
@@ -24,28 +24,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/calebephrem/unique-custom-id"
+    "url": "https://github.com/calebephrem/ucid-js"
   },
   "bugs": {
-    "url": "https://github.com/calebephrem/unique-custom-id/issues"
+    "url": "https://github.com/calebephrem/ucid-js/issues"
   },
   "keywords": [
     "ucid",
     "uuid",
     "uuid generator",
-    "unique custom id",
     "unique id",
-    "unique-id",
     "unique id generator",
     "custom id",
-    "custom-id",
     "custom id generator",
-    "secure id",
-    "secure-id",
-    "secure id generator",
     "id",
-    "id generator",
-    "generator id"
+    "id generator"
   ],
   "devDependencies": {
     "@types/bun": "^1.4.2",
