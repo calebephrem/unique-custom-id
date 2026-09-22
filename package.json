@@ -1,80 +1,57 @@
 {
-	"name": "unique-custom-id",
-	"version": "3.3.0",
-	"description": "⚡️ Generate custom IDs like never before, fast, secure, and fully yours! 🔥",
-	"type": "module",
-	"bin": {
-		"ucid": "./dist/cli/index.js"
-	},
-	"exports": {
-		".": {
-			"import": {
-				"types": "./dist/index.d.ts",
-				"default": "./dist/index.js"
-			},
-			"require": {
-				"types": "./dist/index.d.cts",
-				"default": "./dist/index.cjs"
-			}
-		},
-		"./core": {
-			"import": {
-				"types": "./dist/core/index.d.ts",
-				"default": "./dist/core/index.js"
-			},
-			"require": {
-				"types": "./dist/core/index.d.cts",
-				"default": "./dist/core/index.cjs"
-			}
-		},
-		"./format": {
-			"import": {
-				"types": "./dist/format/index.d.ts",
-				"default": "./dist/format/index.js"
-			},
-			"require": {
-				"types": "./dist/format/index.d.cts",
-				"default": "./dist/format/index.cjs"
-			}
-		}
-	},
-	"scripts": {
-		"format": "prettier --write .",
-		"build": "tsup",
-		"test": "node ./test/index.ts"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/calebephrem/unique-custom-id"
-	},
-	"bugs": {
-		"url": "https://github.com/calebephrem/unique-custom-id/issues"
-	},
-	"keywords": [
-		"ucid",
-		"ucid generator",
-		"uuid",
-		"uuid generator",
-		"unique custom id",
-		"unique id",
-		"unique-id",
-		"unique id generator",
-		"custom id",
-		"custom-id",
-		"custom id generator",
-		"secure id",
-		"secure-id",
-		"secure id generator",
-		"id",
-		"id generator",
-		"generator id"
-	],
-	"author": "Caleb Ephrem",
-	"license": "MIT",
-	"devDependencies": {
-		"@types/node": "^25.6.0",
-		"prettier": "^3.8.1",
-		"tsup": "^8.5.1",
-		"typescript": "^5.9.3"
-	}
+  "name": "unique-custom-id",
+  "version": "3.3.0",
+  "description": "Generate an ID that is as structured as you want it to be.",
+  "type": "module",
+  "author": "Caleb Ephrem",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "scripts": {
+    "format": "prettier --write .",
+    "build": "tsup",
+    "test": "node ./test/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/calebephrem/unique-custom-id"
+  },
+  "bugs": {
+    "url": "https://github.com/calebephrem/unique-custom-id/issues"
+  },
+  "keywords": [
+    "ucid",
+    "uuid",
+    "uuid generator",
+    "unique custom id",
+    "unique id",
+    "unique-id",
+    "unique id generator",
+    "custom id",
+    "custom-id",
+    "custom id generator",
+    "secure id",
+    "secure-id",
+    "secure id generator",
+    "id",
+    "id generator",
+    "generator id"
+  ],
+  "devDependencies": {
+    "@types/bun": "^1.4.2",
+    "@types/node": "^26.6.2",
+    "prettier": "^3.8.1",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  }
 }
