@@ -1,6 +1,6 @@
 {
   "name": "unique-custom-id",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Generate an ID that is as structured as you want it to be.",
   "type": "module",
   "author": "Caleb Ephrem",
@@ -19,8 +19,7 @@
   },
   "scripts": {
     "format": "prettier --write .",
-    "build": "tsup",
-    "test": "node ./test/index.ts"
+    "build": "tsup"
   },
   "repository": {
     "type": "git",
