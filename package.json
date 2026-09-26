@@ -1,6 +1,6 @@
 {
-  "name": "ucid-js",
-  "version": "1.0.0",
+  "name": "unique-custom-id",
+  "version": "4.0.0",
   "description": "Generate an ID that is as structured as you want it to be.",
   "type": "module",
   "author": "Caleb Ephrem",
@@ -24,10 +24,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/calebephrem/ucid-js"
+    "url": "https://github.com/calebephrem/unique-custom-id"
   },
   "bugs": {
-    "url": "https://github.com/calebephrem/ucid-js/issues"
+    "url": "https://github.com/calebephrem/unique-custom-id/issues"
   },
   "keywords": [
     "ucid",
